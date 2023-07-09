@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Projects</title>
+    <link rel="stylesheet" type="text/css" href="./css/project.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<body>
+    <article id="selectionText">
+        <div id="backBtn">↶</div>
+        <section class="imageDescription">
+            <div class="imageController">
+                <img class="mySlides" src="./assets/visuals/version0.png" alt="img">
+                <img class="mySlides" src="./assets/visuals/flowers.jpg" alt="img">
+                <img class="mySlides" src="./assets/visuals/person.png" alt="img">
+            </div>
+            <div class="slideController">
+                <button class="slideArrow arrowLeft">&#10094;</button>
+                <div class="badgeGroup"></div>
+                <button class="slideArrow arrowRight">&#10095;</button>
+            </div>
+        </section>
+        
+        <section class="textDescription">
+            <h2 id="textTitle" class="textDescriptionContent">Project Name</h2>
+            <p id="textP" class="textDescriptionContent">Note that that browser support for these values is nuanced. For example, space-between never got support from some versions of Edge, and start/end/left/right aren’t in Chrome yet. MDN has detailed charts. The safest values are flex-start, flex-end, and center.
+
+                There are also two additional keywords you can pair with these values: safe and unsafe. Using safe ensures that however you do this type of positioning, you can’t push an element such that it renders off-screen (e.g. off the top) in such a way the content can’t be scrolled too (called “data loss”).</p>
+            <button id="textBtn" class="textDescriptionContent">Button</button>
+        </section>
+    </article>
+
+    <script type = "module" src="./js/project.js"></script>
+</body>
+</html>

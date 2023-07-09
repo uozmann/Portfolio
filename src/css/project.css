@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Yeseva+One&display=swap');
+/* font-family: 'Poiret One', cursive;
+font-family: 'Yeseva One', cursive; */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(195, 195, 195);
+}
+
+div#backBtn {
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    position: fixed;
+    top: 10vh;
+    left: 9vw;
+    width: 3vw;
+    height: 3vw;
+    font-size: 28px;
+    font-family: 'Yeseva One', cursive;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#backBtn:hover {
+    cursor: pointer;
+}
+
+h2 {
+    color: rgba(0, 0, 0, 0.5);
+	font-size: 28px;
+    font-family: 'Yeseva One', cursive;
+    font-weight: bold;
+}
+
+p, a, button {
+    font-size: 14px;
+    font-family: 'Poiret One', cursive;
+    font-weight: 400;
+    margin-bottom: 1em;
+    text-justify: inter-word;
+}
+
+button {
+    background: rgb(149, 255, 167);
+    border: 2px solid rgb(149, 255, 167);
+}
+
+button:hover {
+    background: transparent;
+    border: 2px solid rgb(149, 255, 167);
+}
+
+#selectionText {
+    margin-left: 10vw;
+    margin-top: 12vh;
+    margin-bottom: 1em; 
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.elementFadeInDown {
+    animation: fadeInDown;
+    animation-duration: 2s;
+}
+
+section {
+    height: 100%;
+}
+
+section.textDescription {
+    width: 30%;
+    display: flex;
+    flex-flow: column;
+    /* align-items: center; */
+}
+
+.textDescriptionContent {
+    padding-inline: 10%;
+}
+
+#textTitle {
+    position: relative;
+    left: -40%;
+    top: -5%;
+    background-color: rgb(149, 255, 167);
+}
+
+section.imageDescription {
+    width: 70%;
+    border: 2px solid black;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    align-content: space-between;
+}
+
+.imageController {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+}
+
+.slideController button {
+    background: transparent;
+    border: none;
+}
+
+.slideController button:hover {
+    color: rgb(149, 255, 167);
+    font-weight: 900;
+}
+.slideController {
+    padding-inline: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slideBadge {
+    height:13px;
+    width:13px;
+}
+
+.slideArrow .slideBadge{
+    cursor: pointer;
+}
+
+@keyframes swipeIn {
+    50% {
+        font-weight:900;
+    }
+    75% {
+        font-weight: 100;
+    }
+} 

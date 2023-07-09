@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Man Zou Portfolio</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
+		<link rel="stylesheet"
+    	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+	</head>
+	<body>	
+		<!-- Progress bar -->
+		<div id="loading">
+			<div class="progress"><div class="progressbar">LOADING</div></div>
+		</div>
+		<section id="toolbar">
+			<div id="menuLogo">⋯</div>
+			<div id="homeLogo">⌒</div> 
+		</section>
+		
+		<header id="menu"> 
+			<div>
+				<p>Email: liberty.32@live.ca
+					LinkedIn: <a href="linkedin.com/in/man-zou-3604ba201"> Man Zou</a>
+				</p>
+				<!-- <a href="./about.html">About</a> -->
+			</div>
+		</header>
+
+		<!-- On selection trigger -->
+		<section>
+			<article id="selectionText">
+				<h1 id="selectionTitle"></h1>
+				<h2 id="selectionSubtitle"></h2>
+				<p id="selectionP"></p>
+				<!-- <button id="selectionButton"></button> -->
+			</article>
+			<!-- Frames for each canvas rendering -->
+		<span data-diagram="top-left" class="left"></span>
+		<span data-diagram="top-right" class="right"></span>
+		<span data-diagram="bottom-left" class="left"></span>
+		<span data-diagram="bottom-right" class="right"></span>
+		</section>
+
+		<!-- For pointercontrol lock area -->
+		<div id="captureZone"></div>
+
+		<script type = "module" src="./js/main.js"></script>
+	</body>
+</html>

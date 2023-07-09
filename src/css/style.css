@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Yeseva+One&display=swap');
+/* font-family: 'Poiret One', cursive;
+font-family: 'Yeseva One', cursive; */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Three.js renderer settings */
+canvas { 
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -100;
+    transition: 1s; 
+    /* mainly for the blur transition effect */
+}
+
+#selectionText {
+    margin-left: 10vw;
+    margin-top: 20vh;
+    margin-bottom: 1em; 
+}
+
+.elementAnimate {
+    animation: fadeInDown;
+    animation-duration: 2s;
+}
+
+h1 {
+	font-size: 144px;
+	font-family: 'Yeseva One', cursive;
+    /* color: white; */
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.7);
+    /* keyframe animation does not work for css2d */
+    animation-name: change-color;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
+h2 {
+    color: rgba(0, 0, 0, 0.5);
+	font-size: 28px;
+    font-family: 'Yeseva One', cursive;
+    font-weight: bold;
+}
+
+p, a, div {
+    font-size: 24px;
+    font-family: 'Poiret One', cursive;
+    margin-bottom: 1em;
+}
+
+button{
+    background-color: #ffffff9d;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(103, 103, 103);;
+    padding: 15px 32px;
+    margin-right: 1em;
+    text-align: center;
+    text-decoration: none;
+    margin: 1em 0;
+    font-family: 'Palette Mosaic', cursive;
+    font-size: 24px;
+}
+  
+button:hover{
+      background-color: #c8c8c89d;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      margin: 1em 0;
+      font-size: 24px;
+      cursor: pointer;
+}
+
+section#toolbar {
+    position: absolute;
+    width: 100%;
+    display: flex;
+}
+
+#menuLogo {
+  position: fixed;  
+  top: 0;
+  right: 0;
+  margin: 1em;
+  font-size: 48px;
+}
+
+#menuLogo:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
+#homeLogo {
+    position: fixed;  
+    top: 0;
+    right: 0;
+    margin: 1em;
+    font-size: 48px;
+    display: none;
+  }
+
+header {
+    position: fixed;  
+    top: 3em;
+    right: 0;
+    margin: 1em;
+    width: 20vw;
+	padding: 2em;
+    display: none;
+    flex-flow: column;
+    justify-content:center;
+    text-align: right;
+}
+
+header p {
+    padding: 1em;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    text-decoration: none;
+}
+header a {
+    color: rgb(181, 181, 181);
+    font-size: 14px;
+    text-decoration: none;
+}
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Palette Mosaic', cursive;
+    font-size: 72px;
+}
+#loading .progress {
+    margin: 1.5em;
+    border: 1px solid rgb(200, 190, 0);
+    width: 50vw;
+}
+#loading .progressbar {
+    margin: 2px;
+    background: rgb(200, 190, 0);
+    height: 1em;
+    transform-origin: top left;
+    transform: scaleX(0);
+}
+
+#captureZone {
+    display: none;
+    position: fixed;
+    width: 2em;
+    height: 2em;
+    border: 2px solid rgb(255, 255, 255) !important;
+}
+
+@keyframes change-color {
+    25% {
+    }
+    50% {
+        /* -webkit-text-stroke: 1px rgb(255, 255, 255);
+        color: rgba(255, 255, 255, 0); */
+        font-size: 150px;
+    }
+    75% {
+    }
+    100% {
+      /* -webkit-text-stroke: 1px  rgba(255, 255, 255, 0);
+      color: rgb(255, 255, 255); */
+      font-size: 144px;
+    }
+} 
+
+@keyframes swipeIn {
+    25% {
+      width: 0%;
+      height: 0%;
+    }
+    50% {
+      width: 100%;
+    }
+    75% {
+      height: 100%;
+    }
+} 
