@@ -13,7 +13,7 @@ canvas {
 	top: 0;
 	left: 0;
 	z-index: -100;
-    transition: 1s; 
+    transition: 2s; 
     /* mainly for the blur transition effect */
 }
 

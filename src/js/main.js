@@ -209,9 +209,7 @@ Promise.all([loadAsync('./assets/visuals/sphereanim0.glb'), loadAsync('./assets/
 		blenderModels.push(models[j].scene);
 		if (models[j].animations.length > 0) {
 		blenderMixer.push(new THREE.AnimationMixer( models[j].scene ));
-		// blenderMixer[blenderMixerIndex].clipAction( models[j].animations[0]).play();
 		blenderActions1.push(blenderMixer[blenderMixerIndex].clipAction( models[j].animations[0]));
-		// blenderActions2.push(blenderMixer[blenderMixerIndex].clipAction( models[j].animations[1]));
 		} 
 		if (models[j].animations.length > 1) {
 			blenderActions2.push(blenderMixer[blenderMixerIndex].clipAction( models[j].animations[1]));
@@ -230,10 +228,10 @@ Promise.all([loadAsync('./assets/visuals/sphereanim0.glb'), loadAsync('./assets/
 	blenderModels[1].rotateY( Math.PI/4);
 	// blenderActions1[1].play();
 	blenderModels[1].visible = false;
-	console.log(blenderActions1); //7
-	console.log(blenderActions2); //6
-	console.log(blenderActions3); //6
-	console.log(blenderActions4); //2
+	// console.log(blenderActions1); //7
+	// console.log(blenderActions2); //6
+	// console.log(blenderActions3); //6
+	// console.log(blenderActions4); //2
 });
 
 //Preload GUI
@@ -492,7 +490,7 @@ function onDocumentMouseMove( event ) {
 					displayTitleText('', '', '',0, 0);
 					animateSphere(0);
 				}
-				console.log(INTERSECTED.name);
+				console.log(blenderModels[1].position);
 			}
 		} else {
 			if ( INTERSECTED ) {
