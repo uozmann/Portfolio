@@ -52,6 +52,38 @@ const captureZone = document.getElementById('captureZone');
 //Scroll interaction
 let scrollPercent = 0;
 let scrollAnimations = [];
+//Artwork Information
+let currentProjectId = 0;
+let digitalProjects = [
+	{
+		title: "Farewell Erren",
+		year: "2023",
+		author: "Man Zou",
+		description: "Lorem Ipsum.",
+		images: ["./assets/visuals/farewellErren1.png", "./assets/visuals/farewellErren0.png"]
+	},
+	{
+		title: "A lifetime in circle",
+		year: "2022",
+		author: "Man Zou",
+		description: "Lorem Ipsum.",
+		images: ["./assets/visuals/version0.png", "./assets/visuals/flowers.jpg", "./assets/visuals/person.png"]
+	},
+	{
+		title: "PaperMan",
+		year: "2022",
+		author: "Man Zou",
+		description: "Lorem Ipsum.",
+		images: ["./assets/visuals/farewellErren1.png", "./assets/visuals/farewellErren1.png"]
+	},
+	{
+		title: "Alliium",
+		year: "2021",
+		author: "Man Zou",
+		description: "Lorem Ipsum.",
+		images: ["./assets/visuals/farewellErren1.png", "./assets/visuals/farewellErren1.png"]
+	}
+];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //PRELOAD SECTION
 const loadManager = new THREE.LoadingManager();
@@ -107,13 +139,12 @@ draw(); //call draw again to make it continuous
 
 function render() {
 	renderer.render( scene, camera );
-	// controls.update();
     playScrollAnimations();
 	//To update gltf models animations
 	let delta = clock.getDelta();
   	for(let i=0; i<blenderMixer.length; i++){
     blenderMixer[i].update( delta );
-  }
+  	}
 }
 
 //Pushing the scroll animations
@@ -128,7 +159,8 @@ scrollAnimations.push({
 		camera.position.x = lerp(1, -0.5, scalePercent(0, 15));
         camera.position.y = lerp(1, 2.5, scalePercent(0, 15));
 		camera.position.z = lerp(5, 3, scalePercent(0, 15));
-		containerScreenH1.textContent = "Farewell Erren";
+		containerScreenH1.textContent = digitalProjects[0].title;
+		currentProjectId = 0;
         containerScreen.style.opacity = lerp(0, 1, scalePercent(0, 15));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(0, 15));
     }
@@ -155,7 +187,9 @@ scrollAnimations.push({
         camera.position.x = lerp(-0.5, 3.1, scalePercent(25, 40));
 		camera.position.y = lerp(2.5, 3.5, scalePercent(25, 40));
         camera.position.z = lerp(3, -0.5, scalePercent(25, 40));
-		containerScreenH1.textContent = "Another Artwork";
+		containerScreenH1.textContent = digitalProjects[1].title;
+		currentProjectId = 1;
+		imageArrayRenewed = true;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(25, 40));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(25, 40));
     }
@@ -182,7 +216,8 @@ scrollAnimations.push({
         camera.position.x = lerp(3.1, 4, scalePercent(50, 65));
 		camera.position.y = lerp(2.5, 3.5, scalePercent(50, 65));
         camera.position.z = lerp(-0.5, -3.7, scalePercent(50, 65));
-		containerScreenH1.textContent = "Another Artwork2";
+		containerScreenH1.textContent = digitalProjects[2].title;
+		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(50, 65));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(50, 65));
     }
@@ -209,7 +244,8 @@ scrollAnimations.push({
         camera.position.x = lerp(4, 0, scalePercent(75, 90));
 		camera.position.y = lerp(3.5, 5.3, scalePercent(75, 90));
         camera.position.z = lerp(-3.7, -1.7, scalePercent(75, 90));
-		containerScreenH1.textContent = "Another Artwork3";
+		containerScreenH1.textContent = digitalProjects[3].title;
+		currentProjectId = 3;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(75, 90));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(75, 90));
     }
@@ -225,42 +261,6 @@ scrollAnimations.push({
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(95, 100));
     }
 });
-// //ProjectTitle
-// scrollAnimations.push({
-//     start: 0,
-//     end: 5,
-//     func: () => {
-// 		animateContainerScreen(false);
-//     }
-// });
-// scrollAnimations.push({
-//     start: 5,
-//     end: 20, //15
-//     func: () => {
-// 		animateContainerScreen(true);
-//     }
-// });
-// scrollAnimations.push({
-//     start: 20,
-//     end: 30,
-//     func: () => {
-// 		animateContainerScreen(false);
-//     }
-// });
-// scrollAnimations.push({
-//     start: 30,
-//     end: 45,
-//     func: () => {
-// 		animateContainerScreen(true);
-//     }
-// });
-// scrollAnimations.push({
-//     start: 40,
-//     end: 45,
-//     func: () => {
-// 		animateContainerScreen(false);
-//     }
-// });
 
 function lerp(x, y, a) {
     return (1 - a) * x + a * y;
@@ -306,7 +306,7 @@ function onDocumentMouseMove( event ) {
 				} else { //when mouse leaves the diary object
 					document.body.style.cursor = 'context-menu';
 				}
-				console.log(INTERSECTED.name);
+				// console.log(INTERSECTED.name);
 			}
 		} else {
 			if ( INTERSECTED ) {
@@ -334,7 +334,6 @@ function onDocumentScroll() {
                 document.documentElement.clientHeight)) *
         100
     ;
-	console.log(containerScreen.className);
 }
 
 function onWindowKeypress() {
@@ -355,17 +354,36 @@ let containerScreenH1 = document.getElementById("containerScreenH1");
 let openBtn = document.querySelector("#openBtn");
 let backBtn = document.getElementById("backBtn");
 let descriptionContainer = document.getElementById("selectionText");
+//Text Description Variables
+let descriptionTitle = document.getElementById("textTitle");
+let descriptionAuthor = document.getElementById("textAuthor");
+let descriptionYear = document.getElementById("textYear");
+let descriptionP = document.getElementById("textP");
 //SlideShow variables
 let badgeController = document.querySelector(".badgeGroup");
 let leftArrow = document.querySelector(".arrowLeft");
 let rightArrow = document.querySelector(".arrowRight");
 let dotsBadge = [];
-let images = document.getElementsByClassName("mySlides");
+let imageController = document.querySelector(".imageController");
+let images = [];
+let imageArrayRenewed = false;
 
 let slideIndex = 0;
 
+
+createImages();
 createBadges();
 displayImage();
+
+function createImages() {
+	for (let i = 0; i < digitalProjects[currentProjectId].images.length; i++) {
+		let singleImg = document.createElement("img");
+		singleImg.src = digitalProjects[currentProjectId].images[i];
+		singleImg.className += "mySlides";
+		imageController.appendChild(singleImg);
+		images.push(singleImg);
+	}
+}
 
 function createBadges() {
     for (let i = 0; i < images.length; i++) {
@@ -403,6 +421,7 @@ function onLeftArrowClick() {
     }
     displayImage();
     displayBadges();
+	console.log("Slide Index: " + slideIndex + "; images length: " + images.length);
 }
 
 function onRightArrowClick() {
@@ -413,6 +432,7 @@ function onRightArrowClick() {
     }
     displayImage();
     displayBadges();
+	console.log("Slide Index: " + slideIndex + "; images length: " + images.length);
 }
 
 function onBadgeClick(badgeIndex) {  
@@ -429,12 +449,30 @@ function onBackBtnClick() {
     renderer.domElement.style.filter = `none`;
 }
 
+function synchronizeContent() {
+	if (imageArrayRenewed === true) {
+		images.length = 0;
+		dotsBadge.length = 0;
+		imageController.innerHTML = "";
+		badgeController.innerHTML = "";
+		createImages();
+		displayImage();
+		createBadges();
+	}
+
+	descriptionTitle.textContent = digitalProjects[currentProjectId].title;
+	descriptionAuthor.textContent = digitalProjects[currentProjectId].author;
+	descriptionYear.textContent = digitalProjects[currentProjectId].year;
+	descriptionP.textContent = digitalProjects[currentProjectId].description;
+}
 function onOpenBtnClick() {
+	synchronizeContent();
     descriptionContainer.style.display = "flex";
     openBtn.style.display = "none";
 	containerScreen.style.display = "none";
     backBtn.style.display = "flex";
     renderer.domElement.style.filter = `blur(10px)`;
+	console.log(images[0]);
 }
 
 leftArrow.addEventListener('click', onLeftArrowClick);
