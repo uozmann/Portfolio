@@ -10,9 +10,6 @@
     <article id="selectionText">
         <section class="imageDescription elementLightSpeedInRight">
             <div class="imageController">
-                <!-- <img class="mySlides" src="./assets/visuals/version0.png" alt="img">
-                <img class="mySlides" src="./assets/visuals/flowers.jpg" alt="img">
-                <img class="mySlides" src="./assets/visuals/person.png" alt="img"> -->
             </div>
             <div class="slideController">
                 <button class="slideArrow arrowLeft">&#10094;</button>
@@ -26,14 +23,13 @@
             <h3 id="textAuthor" class="textDescriptionContent"></h3>
             <h3 id="textYear" class="textDescriptionContent"></h3>
             <p id="textP" class="textDescriptionContent"></p>
-            <button id="textBtn" class="textDescriptionContent">Button</button>
+            <button id="textBtn" class="textDescriptionContent">Access Document</button>
         </section>
     </article>
 
     <section id="toolbar">
         <div id="menuLogo">⋯</div>
         <div id="backBtn" class="elementFadeInDown">↶</div>
-        <!-- <button id="openBtn">Project Name</button> -->
     </section>
     
     <article>
@@ -49,12 +45,52 @@
     <div id="containerScreen" class="containerScreen">
         <section>
             <h1 id="containerScreenH1"></h1>
-            <!-- <h2>2023</h2> -->
         </section>
         <button id="openBtn">View</button>
     </div>
+
+    <article id="moreWorks">
+            <h2>Explore More</h2>
+            <a href="google.ca" class="workBox">
+                <div>
+                    <h2>PaperMan</h2>
+                    <p>[2022] Web game narrating self-identification and social pressure; gameplay based on voice recognition.</p>
+                </div>
+                <div>
+                    <h2>➤</h2>
+                </div>
+            </a>
+            <a href="google.ca" class="workBox">
+                <div>
+                    <h2>Artwork Title</h2>
+                    <p>Year</p>
+                </div>
+                <div>
+                    <h2>➤</h2>
+                </div>
+            </a>
+            <a href="google.ca" class="workBox">
+                <div>
+                    <h2>Artwork Title</h2>
+                    <p>Year</p>
+                </div>
+                <div>
+                    <h2>➤</h2>
+                </div>
+            </a>
+    </article>
     <!-- For pointercontrol lock area -->
 	<div id="captureZone"></div>
+
+    <section id="menuPage">
+        <section>
+            <button id="homeBtn" onclick="location.href='./home.html';">Home</button>
+            <button id="aboutBtn" onclick="location.href='./about.html';">About</button>
+        </section>
+        <p>Scroll to select works, click on the "View" button when it appears to view project.</p>
+        <p>Go back to home page to select a new category of works.</p>
+    </section>
+    <div id="menuCloseLogo">X</div>
     <script type = "module" src="./js/project.js"></script>
 </body>
 </html>
