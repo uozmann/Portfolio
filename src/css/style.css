@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Yeseva+One&display=swap');
-/* font-family: 'Poiret One', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Quicksand&family=Yeseva+One&display=swap');
+/* font-family: 'Quicksand', cursive;
 font-family: 'Yeseva One', cursive; */
 * {
     padding: 0;
@@ -47,33 +47,30 @@ h2 {
     font-weight: bold;
 }
 
-p, a, div {
-    font-size: 24px;
-    font-family: 'Poiret One', cursive;
+p, a, div, button {
+    font-size: 18px;
+    font-family: 'Quicksand', cursive;
     margin-bottom: 1em;
+    text-justify: inter-word;
 }
 
-button{
-    background-color: #ffffff9d;
-    color: rgb(0, 0, 0);
-    border: 1px solid rgb(103, 103, 103);;
-    padding: 15px 32px;
-    margin-right: 1em;
-    text-align: center;
-    text-decoration: none;
-    margin: 1em 0;
-    font-family: 'Palette Mosaic', cursive;
+p#selectionP {
+    font-family: 'Poiret One', cursive;
     font-size: 24px;
 }
-  
-button:hover{
-      background-color: #c8c8c89d;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      margin: 1em 0;
-      font-size: 24px;
-      cursor: pointer;
+button {
+    padding-inline: 1em;
+    background: rgba(255, 255, 255, 0.305);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    font-size: 24px;
+}
+
+button:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.704);
+    color: white;
+    border: 2px solid rgb(255, 255, 255);
 }
 
 section#toolbar {
@@ -161,6 +158,36 @@ header a {
     width: 2em;
     height: 2em;
     border: 2px solid rgb(255, 255, 255) !important;
+}
+
+
+section#menuPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgb(20, 20, 20);
+    color: rgb(255, 255, 255);
+    padding: 10%;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-flow: column;
+}
+
+div#menuCloseLogo {
+    position: fixed;  
+    top: 0;
+    right: 0;
+    margin: 1em;
+    font-size: 48px;
+    color: white;
+    display: none;
+}
+
+div#menuCloseLogo:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: 0.2s;
 }
 
 @keyframes change-color {

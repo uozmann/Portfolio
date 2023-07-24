@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Projects</title>
+    <link rel="stylesheet" type="text/css" href="./css/project.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<body>
+    <article id="selectionText">
+        <section class="imageDescription elementLightSpeedInRight">
+            <div class="imageController">
+            </div>
+            <div class="slideController">
+                <button class="slideArrow arrowLeft">&#10094;</button>
+                <div class="badgeGroup"></div>
+                <button class="slideArrow arrowRight">&#10095;</button>
+            </div>
+        </section>
+        
+        <section class="textDescription elementLightSpeedInRight">
+            <h2 id="textTitle" class="textDescriptionContent"></h2>
+            <h3 id="textAuthor" class="textDescriptionContent"></h3>
+            <h3 id="textYear" class="textDescriptionContent"></h3>
+            <p id="textP" class="textDescriptionContent"></p>
+            <button id="textBtn" class="textDescriptionContent">Access Document</button>
+        </section>
+    </article>
+
+    <section id="toolbar">
+        <div id="menuLogo">⋯</div>
+        <div id="backBtn" class="elementFadeInDown">↶</div>
+    </section>
+    
+    <article>
+        <!-- 100vh each -->
+        <h1></h1> 
+        <h1></h1>
+        <h1></h1>
+        <h1></h1> 
+        <h1></h1>
+        <h1></h1>
+    </article>
+
+    <div id="containerScreen" class="containerScreen">
+        <section>
+            <h1 id="containerScreenH1"></h1>
+        </section>
+        <button id="openBtn">View</button>
+    </div>
+
+    <article id="moreWorks">
+            <h2>Explore More</h2>
+            <a href="google.ca" class="workBox">
+                <div>
+                    <h2>Artwork Title</h2>
+                    <p>[2022] Web game narrating self-identification and social pressure; gameplay based on voice recognition.</p>
+                </div>
+                <div>
+                    <h2>➤</h2>
+                </div>
+            </a>
+            <a href="google.ca" class="workBox">
+                <div>
+                    <h2>Artwork Title</h2>
+                    <p>Year</p>
+                </div>
+                <div>
+                    <h2>➤</h2>
+                </div>
+            </a>
+            <a href="./space.html" class="workBox">
+                <div>
+                    <h2>Continue with "Space" category</h2>
+                    <p>Environment/Interior/Living Space</p>
+                </div>
+                <div>
+                    <h2>➤</h2>
+                </div>
+            </a>
+            
+    </article>
+
+    <section id="menuPage">
+        <section>
+            <button id="homeBtn" onclick="location.href='./home.html';">Home</button>
+            <button id="aboutBtn" onclick="location.href='./about.html';">About</button>
+        </section>
+        <p>Scroll to select works, click on the "View" button when it appears to view project.</p>
+        <p>Go back to home page to select a new category of works.</p>
+    </section>
+    <div id="menuCloseLogo">X</div>
+    <script type = "module" src="./js/object.js"></script>
+</body>
+</html>

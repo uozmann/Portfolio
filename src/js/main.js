@@ -507,9 +507,9 @@ function onDocumentMouseClick(event) {
 	if (INTERSECTED.name === 'Sphere003') {
 		window.location.href = "digital.html";
 	} else if (INTERSECTED.name === 'Sphere002') {
-		window.location.href = "planar.html";
-	} else if (INTERSECTED.name === 'Sphere001') {
 		window.location.href = "object.html";
+	} else if (INTERSECTED.name === 'Sphere001') {
+		window.location.href = "planar.html";
 	} else if (INTERSECTED.name === 'Sphere004') {
 		window.location.href = "space.html";
 	}
@@ -532,11 +532,6 @@ function onWindowResize() {
 	// labelRenderer.setSize( this.window.innerWidth, this.window.innerHeight );
 }
 
-//Instruction (rule) button
-function onMenuLogoMouseClick(element) {
-	document.getElementById('menu').style.display = 'flex';
-}
-
 //Home button
 function onHomeMouseClick(element) {
 	this.style.display = 'none';
@@ -556,9 +551,27 @@ document.addEventListener( 'keydown', onDocumentKeyDown);
 // document.addEventListener( 'keyup', onDocumentKeyUp);
 window.addEventListener( 'resize', onWindowResize, false );
 //Interractive narratives
-document.getElementById('menuLogo').addEventListener('click', onMenuLogoMouseClick);
 document.getElementById('homeLogo').addEventListener('click', onHomeMouseClick);
 //Section title
 titleContainer.addEventListener('animationend', onTitleAnimationEnd, false);
 //END OF EVENT HANDLERS SECTION
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MENU SECTION
+let menuBtn = document.getElementById("menuLogo");
+let menuCloseBtn = document.getElementById("menuCloseLogo");
+let menu = document.getElementById("menuPage");
+
+function onMenuClick() {
+	menu.style.display = "flex";
+	menuCloseBtn.style.display = "block";
+}
+
+function onMenuCloseClick() {
+	menu.style.display = "none";
+	menuCloseBtn.style.display = "none";
+}
+
+menuBtn.addEventListener('click', onMenuClick);
+menuCloseBtn.addEventListener('click', onMenuCloseClick);

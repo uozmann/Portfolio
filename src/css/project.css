@@ -160,7 +160,15 @@ section.imageDescription {
     justify-content: center;
 }
 
-img.mySlides {
+iframe {
+    /* width: 560px;
+    height: 315px; */
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    display: none;
+}
+.mySlides {
     max-width: 100%;
     max-height: 100%;
     display: none;
@@ -214,14 +222,6 @@ div#containerScreen {
     display: none;
 }
 
-#captureZone {
-    display: none;
-    position: fixed;
-    width: 2em;
-    height: 2em;
-    border: 2px solid rgb(255, 255, 255) !important;
-}
-
 section#menuPage {
     position: fixed;
     top: 0;
@@ -259,15 +259,13 @@ article#moreWorks {
     display: flex;
     flex-flow: column;
     justify-content: flex-end;
+    z-index: 5;
 }
-article#moreWorks h2 {
-    align-self: flex-end;
-}
+
 
 article#moreWorks .workBox {
     width: 50%;
     background: rgba(255, 255, 255, 0.7);
-    align-self: flex-end;
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -284,6 +282,7 @@ article#moreWorks .workBox p {
     padding: 1em;
     color: black;
 }
+
 .elementFadeInDown {
     animation: fadeInDown;
     animation-duration: 2s;
