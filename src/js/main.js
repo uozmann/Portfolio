@@ -446,14 +446,9 @@ function onDocumentMouseMove( event ) {
 				INTERSECTED = intersects[ 0 ].object; //assign it to the pointed object
 				//Check if the diary was hovered
 				if(INTERSECTED.name === 'Cube148' || INTERSECTED.name === 'Cube147' || INTERSECTED.name === 'Cube146' || INTERSECTED.name === 'Cube145') {
-					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex(); ////record the current colour
-					INTERSECTED.material.emissive.setHex( 0x0f0fff ); //blue emmissive
-					//change cursor to pointer when hovered on the diary
-					document.body.style.cursor = 'pointer';
-					player.diaryHovered = true;
+					//
 				} else if(INTERSECTED.name === 'Version0') { //Check if version 0 is hovered
-					document.body.style.cursor = 'pointer';
-					player.version0Hovered = true;
+					//
 				} else if(INTERSECTED.name === 'Sphere003') { //Check if version 0 is hovered
 					document.body.style.cursor = 'pointer';
 					player.sphereHovered = true;
@@ -490,7 +485,6 @@ function onDocumentMouseMove( event ) {
 					displayTitleText('', '', '',0, 0);
 					animateSphere(0);
 				}
-				console.log(blenderModels[1].position);
 			}
 		} else {
 			if ( INTERSECTED ) {

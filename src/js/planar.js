@@ -144,7 +144,7 @@ let digitalProjects = [
 		images: ["./assets/visuals/digital/allifetimeincircle1.png", "./assets/visuals/digital/allifetimeincircle2.jpg", "./assets/visuals/digital/allifetimeincircle.jpg", "./assets/visuals/digital/allifetimeincircle3.png"]
 	},
 	{
-		title: "Object talk",
+		title: "ArtMatters: Object talk",
 		year: "2022",
 		author: "Man Zou",
 		description: "Lorem Ipsum.",
@@ -236,6 +236,7 @@ scrollAnimations.push({
         camera.position.y = lerp(scrollAnimationsProperty.project1.pyStart, scrollAnimationsProperty.project1.pyEnd, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		camera.position.z = lerp(scrollAnimationsProperty.project1.pzStart, scrollAnimationsProperty.project1.pzEnd, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		openBtn.style.display = "none";
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 0;
         containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
@@ -247,6 +248,8 @@ scrollAnimations.push({
     end: scrollAnimationsProperty.project1Select.end,
     func: () => {
 		openBtn.style.display = "block";
+		containerScreenH1.classList.add("elementColorIn");
+		openBtn.classList.add("elementWhiteIn");
     }
 });
 scrollAnimations.push({
@@ -256,6 +259,7 @@ scrollAnimations.push({
 		camera.rotation.x = lerp(scrollAnimationsProperty.project1.rxEnd, scrollAnimationsProperty.project1End.rxEnd, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
 		camera.rotation.y = lerp(scrollAnimationsProperty.project1.ryEnd, scrollAnimationsProperty.project1End.ryEnd, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project1.rzEnd, scrollAnimationsProperty.project1End.rzEnd, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 0;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
@@ -273,6 +277,7 @@ scrollAnimations.push({
 		camera.position.y = lerp(scrollAnimationsProperty.project1.pyEnd, scrollAnimationsProperty.project2.pyEnd, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
         camera.position.z = lerp(scrollAnimationsProperty.project1.pzEnd, scrollAnimationsProperty.project2.pzEnd, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
 		openBtn.style.display = "none";
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 1;
 		imageArrayRenewed = true;
@@ -285,16 +290,18 @@ scrollAnimations.push({
     end: scrollAnimationsProperty.project2Select.end,
     func: () => {
 		openBtn.style.display = "block";
+		containerScreenH1.classList.add("elementColorIn");
+		openBtn.classList.add("elementWhiteIn");
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project2End.start,
     end: scrollAnimationsProperty.project2End.end,
     func: () => {
-        //_x: -1.1307061698390712, _y: 1.1715071722498083, _z: 1.0983124738776906
 		camera.rotation.x = lerp(scrollAnimationsProperty.project2.rxEnd, scrollAnimationsProperty.project2End.rxEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
 		camera.rotation.y = lerp(scrollAnimationsProperty.project2.ryEnd, scrollAnimationsProperty.project2End.ryEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project2.rzEnd, scrollAnimationsProperty.project2End.rzEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 1;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
@@ -305,10 +312,6 @@ scrollAnimations.push({
     start: scrollAnimationsProperty.project3.start,
     end: scrollAnimationsProperty.project3.end,
     func: () => {
-		// currentScreen = scene.getObjectByName("ShowcasePlane002");
-		// if (currentScreen) {
-		// 	camera.lookAt(currentScreen.position);
-		// }
 		camera.rotation.x = lerp(scrollAnimationsProperty.project2End.rxEnd, scrollAnimationsProperty.project3.rxEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		camera.rotation.y = lerp(scrollAnimationsProperty.project2End.ryEnd, scrollAnimationsProperty.project3.ryEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project2End.rzEnd, scrollAnimationsProperty.project3.rzEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
@@ -316,6 +319,7 @@ scrollAnimations.push({
 		camera.position.y = lerp(scrollAnimationsProperty.project2.pyEnd, scrollAnimationsProperty.project3.pyEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
         camera.position.z = lerp(scrollAnimationsProperty.project2.pzEnd, scrollAnimationsProperty.project3.pzEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		openBtn.style.display = "none";
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[2].title;
 		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
@@ -327,16 +331,16 @@ scrollAnimations.push({
     end: scrollAnimationsProperty.project3Select.end,
     func: () => {
 		openBtn.style.display = "block";
+		containerScreenH1.classList.add("elementColorIn");
+		openBtn.classList.add("elementWhiteIn");
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project3End.start,
     end: scrollAnimationsProperty.project3End.end,
     func: () => {
-		// camera.rotation.x = lerp(scrollAnimationsProperty.project3.rxEnd, scrollAnimationsProperty.project3End.rxEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
-		// camera.rotation.y = lerp(scrollAnimationsProperty.project3.ryEnd, scrollAnimationsProperty.project3End.ryEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
-		// camera.rotation.z = lerp(scrollAnimationsProperty.project3.rzEnd, scrollAnimationsProperty.project3End.rzEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
         camera.position.y = lerp(scrollAnimationsProperty.project3.pyEnd, scrollAnimationsProperty.project3End.pyEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 2;
 		containerScreen.style.opacity = "0";
@@ -458,7 +462,7 @@ function createImages() {
 		let singleVideo = document.createElement('iframe');
 		singleVideo.src = digitalProjects[currentProjectId].video;
 		singleVideo.frameBorder = "none";
-		singleVideo.allow="accelerometer; autoplay; encrypted-media; gyroscope;";
+		singleVideo.allow="accelerometer; encrypted-media; gyroscope;";
 		singleVideo.className += "mySlides";
 		imageController.appendChild(singleVideo);
 		images.push(singleVideo);
@@ -548,6 +552,7 @@ function onBackBtnClick() {
 	containerScreen.style.display = "flex";
     backBtn.style.display = "none";
     renderer.domElement.style.filter = `none`;
+	slideIndex = 0;
 	enableScroll();
 }
 

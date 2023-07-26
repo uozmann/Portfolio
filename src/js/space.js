@@ -48,79 +48,99 @@ const mouse = new THREE.Vector2();
 let mouseAllowed = true;
 let INTERSECTED = false;
 let raycaster = new THREE.Raycaster();
-const captureZone = document.getElementById('captureZone');
 //Scroll interaction
 let scrollPercent = 0;
 let scrollAnimations = [];
 let scrollAnimationsProperty = {
     project1: {
         start: 0,
-        end: 20,
-        pxStart: 0,
-        pyStart: 2,
+        end: 15,
+        pxStart: 2,
+        pyStart: 0,
         pzStart: 2,
         rxStart: 0,
         ryStart: 0,
         rzStart: 0,
-        pxEnd: 6.2,
-        pyEnd: 2.5,
-        pzEnd: 6.5,
-        rxEnd: 0.0673084288191118,
-        ryEnd: 0.17122728160592016,
-        rzEnd: -0.011485650982145401,
+        pxEnd: 1.2,
+        pyEnd: 3.3,
+        pzEnd: 4,
+        rxEnd: -0.026421013356234264,
+        ryEnd: -0.31895299625162554,
+        rzEnd: -0.008286642814844402,
     },
     project1Select: {
-        start: 20,
-        end: 30,
+        start: 15,
+        end: 20,
     },
     project1End : {
-        start: 30,
-        end:  35,
-        rxEnd: -0.11043921040723316,
+        start: 20,
+        end:  25,
+        rxEnd: -0.026421013356234264,
         ryEnd: 0.0008082761005076254,
-        rzEnd: 0.00008963006157066055,
+        rzEnd: -0.008286642814844402,
     },
     project2: {
-        start: 30,
-        end: 50,
-        pxEnd: 6.5,
-        pyEnd: 1.4,
-        pzEnd: -0.4,
-        rxEnd: 0.05393734376032635,
-        ryEnd: 0.15989673737333926,
-        rzEnd: -0.008595828133408357,
+        start: 25,
+        end: 40,
+        pxEnd: -3.1,
+        pyEnd: 3.4,
+        pzEnd: 0.3,
+        rxEnd: -0.026421013356234264,
+        ryEnd: -0.31895299625162554,
+        rzEnd: -0.008286642814844402,
     },
     project2Select: {
-        start: 50,
-        end: 60,
+        start: 40,
+        end: 45,
     },
     project2End : {
-        start: 60,
-        end:  65,
-        rxEnd: -1.1307061698390712,
-        ryEnd: 1.1715071722498083,
-        rzEnd: 1.0983124738776906,
+        start: 45,
+        end: 50, 
+        rxEnd: -0.06510056123294644,
+        ryEnd: -2,
+        rzEnd: -0.06400597154451637,
     },
     project3: {
-        start: 65,
-        end: 85,
-        pxEnd: -1.2,
-        pyEnd: 1.7,
-        pzEnd: -3.5,
-        rxEnd: 3.122659978793609, 
-        ryEnd: -0.5384408716654898,
-        rzEnd: 3.1318831590828364,
+        start: 50,
+        end: 65,
+        pxEnd: 1.8,
+        pyEnd: 4.1,
+        pzEnd: -0.8, 
+        rxEnd: -0.026421013356234264, 
+        ryEnd: -0.31895299625162554,
+        rzEnd: -0.008286642814844402,
     },
     project3Select: {
-        start: 85,
-        end: 95,
+        start: 65,
+        end: 70,
     },
     project3End : {
+        start: 70,
+        end: 75, 
+        rxEnd: 0.5,
+        ryEnd: 0.8,
+        rzEnd: -0.008286642814844402,
+    },
+    project4: {
+        start: 75,
+        end: 90,
+        pxEnd: -3,
+        pyEnd: 7.8,
+        pzEnd: -3.3,
+        rxEnd: -0.026421013356234264, 
+        ryEnd: -0.31895299625162554,
+        rzEnd: -0.008286642814844402,
+    },
+    project4Select: {
+        start: 90,
+        end: 95,
+    },
+    project4End : {
         start: 95,
         end:  100,
-        rxEnd: undefined,
-        ryEnd: undefined,
-        rzEnd: undefined,
+        rxEnd: -1.5,
+        ryEnd: 0,
+        rzEnd: 0,
         pyEnd: -1,
     },
 }
@@ -128,8 +148,8 @@ let scrollAnimationsProperty = {
 let currentProjectId = 0;
 let digitalProjects = [
 	{
-		title: "Winter mood-lifter",
-		year: "2020",
+		title: "Cocoon",
+		year: "2023",
 		author: "Man Zou",
 		description: "Lorem Ipsum.",
 		btn: "https://uozmann.itch.io/farewell-erren",
@@ -137,26 +157,26 @@ let digitalProjects = [
 		images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren0.png"]
 	},
 	{
-		title: "Invisible Heroes",
-		year: "2019",
+		title: "CP3",
+		year: "2021",
 		author: "Man Zou",
 		description: "“A lifetime in Circle” narrates topics on parenting in chronological order: from childhood to parenthood. Across several stages of the life cycle, the infant stage is crucial and determinant for a person’s formation of the self. This period characterized by vulnerability, transformability, and learnability has life-long impacts that are hard to be erased. I want to focus on the plurality of parenthood experiences, and look at the other side of the mirror where not all families live happily forever. I created this website to balance the mass preconception of parenting in hope to lead some less heard voices into this conversation.",
 		btn: "https://uozmann.github.io/CART263/project/Project2/src/indexThree.html", 
 		images: ["./assets/visuals/digital/allifetimeincircle1.png", "./assets/visuals/digital/allifetimeincircle2.jpg", "./assets/visuals/digital/allifetimeincircle.jpg", "./assets/visuals/digital/allifetimeincircle3.png"]
 	},
 	{
-		title: "Object talk",
-		year: "2022",
+		title: "Sculpture Garden",
+		year: "2021",
 		author: "Man Zou",
 		description: "Lorem Ipsum.",
 		btn: "#",
 		images: ["./assets/visuals/digital/ontheclouds.jpg", "./assets/visuals/digital/ontheclouds1.jpg", "./assets/visuals/digital/ontheclouds2.jpg", "./assets/visuals/digital/ontheclouds3.jpg", "./assets/visuals/digital/ontheclouds4.jpg"] 
 	},
 	{
-		title: "TBD",
-		year: "2021",
+		title: "Ebb in flow",
+		year: "2022",
 		author: "Man Zou",
-		description: "Lorem Ipsum.",
+		description: "Ebb in flow was inspired by the flowing sensations of cortisol levels in the body, responding to the stresses in the daily environments. These ever-changing cortisol levels vary when we let ourselves indulge in nature’s calm and restorative abilities, a phenomenon that has yet to be pin-pointed, but whose power is true, nonetheless. The nature-inspired mossy seat invites the viewer to change their cortisol level when taking the chance to sit down, to feel the softness beneath them, sense the smells, and see a visual representation of a calming inner body.",
 		btn: "#",
 		images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren1.png"]
 	}
@@ -229,7 +249,6 @@ scrollAnimations.push({
     start: scrollAnimationsProperty.project1.start,
     end: scrollAnimationsProperty.project1.end,
     func: () => {
-        //end: _x: 0.0673084288191118, _y: 0.17122728160592016, _z: -0.011485650982145401
 		camera.rotation.x = lerp(scrollAnimationsProperty.project1.rxStart, scrollAnimationsProperty.project1.rxEnd, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		camera.rotation.y = lerp(scrollAnimationsProperty.project1.ryStart, scrollAnimationsProperty.project1.ryEnd, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project1.rzStart, scrollAnimationsProperty.project1.rzEnd, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
@@ -237,6 +256,7 @@ scrollAnimations.push({
         camera.position.y = lerp(scrollAnimationsProperty.project1.pyStart, scrollAnimationsProperty.project1.pyEnd, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		camera.position.z = lerp(scrollAnimationsProperty.project1.pzStart, scrollAnimationsProperty.project1.pzEnd, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		openBtn.style.display = "none";
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 0;
         containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
@@ -248,6 +268,8 @@ scrollAnimations.push({
     end: scrollAnimationsProperty.project1Select.end,
     func: () => {
 		openBtn.style.display = "block";
+		containerScreenH1.classList.add("elementColorIn");
+		openBtn.classList.add("elementWhiteIn");
     }
 });
 scrollAnimations.push({
@@ -257,6 +279,7 @@ scrollAnimations.push({
 		camera.rotation.x = lerp(scrollAnimationsProperty.project1.rxEnd, scrollAnimationsProperty.project1End.rxEnd, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
 		camera.rotation.y = lerp(scrollAnimationsProperty.project1.ryEnd, scrollAnimationsProperty.project1End.ryEnd, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project1.rzEnd, scrollAnimationsProperty.project1End.rzEnd, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 0;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
@@ -274,6 +297,7 @@ scrollAnimations.push({
 		camera.position.y = lerp(scrollAnimationsProperty.project1.pyEnd, scrollAnimationsProperty.project2.pyEnd, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
         camera.position.z = lerp(scrollAnimationsProperty.project1.pzEnd, scrollAnimationsProperty.project2.pzEnd, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
 		openBtn.style.display = "none";
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 1;
 		imageArrayRenewed = true;
@@ -286,16 +310,18 @@ scrollAnimations.push({
     end: scrollAnimationsProperty.project2Select.end,
     func: () => {
 		openBtn.style.display = "block";
+		containerScreenH1.classList.add("elementColorIn");
+		openBtn.classList.add("elementWhiteIn");
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project2End.start,
     end: scrollAnimationsProperty.project2End.end,
     func: () => {
-        //_x: -1.1307061698390712, _y: 1.1715071722498083, _z: 1.0983124738776906
 		camera.rotation.x = lerp(scrollAnimationsProperty.project2.rxEnd, scrollAnimationsProperty.project2End.rxEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
-		camera.rotation.y = lerp(scrollAnimationsProperty.project2.rxEnd, scrollAnimationsProperty.project2End.ryEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
-		camera.rotation.z = lerp(scrollAnimationsProperty.project2.rxEnd, scrollAnimationsProperty.project2End.rzEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		camera.rotation.y = lerp(scrollAnimationsProperty.project2.ryEnd, scrollAnimationsProperty.project2End.ryEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		camera.rotation.z = lerp(scrollAnimationsProperty.project2.rzEnd, scrollAnimationsProperty.project2End.rzEnd, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 1;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
@@ -306,10 +332,6 @@ scrollAnimations.push({
     start: scrollAnimationsProperty.project3.start,
     end: scrollAnimationsProperty.project3.end,
     func: () => {
-		// currentScreen = scene.getObjectByName("ShowcasePlane002");
-		// if (currentScreen) {
-		// 	camera.lookAt(currentScreen.position);
-		// }
 		camera.rotation.x = lerp(scrollAnimationsProperty.project2End.rxEnd, scrollAnimationsProperty.project3.rxEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		camera.rotation.y = lerp(scrollAnimationsProperty.project2End.ryEnd, scrollAnimationsProperty.project3.ryEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project2End.rzEnd, scrollAnimationsProperty.project3.rzEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
@@ -317,6 +339,7 @@ scrollAnimations.push({
 		camera.position.y = lerp(scrollAnimationsProperty.project2.pyEnd, scrollAnimationsProperty.project3.pyEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
         camera.position.z = lerp(scrollAnimationsProperty.project2.pzEnd, scrollAnimationsProperty.project3.pzEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		openBtn.style.display = "none";
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[2].title;
 		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
@@ -328,18 +351,62 @@ scrollAnimations.push({
     end: scrollAnimationsProperty.project3Select.end,
     func: () => {
 		openBtn.style.display = "block";
+		containerScreenH1.classList.add("elementColorIn");
+		openBtn.classList.add("elementWhiteIn");
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project3End.start,
     end: scrollAnimationsProperty.project3End.end,
     func: () => {
-		// camera.rotation.x = lerp(scrollAnimationsProperty.project3.rxEnd, scrollAnimationsProperty.project3End.rxEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
-		// camera.rotation.y = lerp(scrollAnimationsProperty.project3.ryEnd, scrollAnimationsProperty.project3End.ryEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
-		// camera.rotation.z = lerp(scrollAnimationsProperty.project3.rzEnd, scrollAnimationsProperty.project3End.rzEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
-        camera.position.y = lerp(scrollAnimationsProperty.project3.pyEnd, scrollAnimationsProperty.project3End.pyEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		camera.rotation.x = lerp(scrollAnimationsProperty.project3.rxEnd, scrollAnimationsProperty.project3End.rxEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		camera.rotation.y = lerp(scrollAnimationsProperty.project3.ryEnd, scrollAnimationsProperty.project3End.ryEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		camera.rotation.z = lerp(scrollAnimationsProperty.project3.rzEnd, scrollAnimationsProperty.project3End.rzEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 2;
+		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+    }
+});
+//
+scrollAnimations.push({
+    start: scrollAnimationsProperty.project4.start,
+    end: scrollAnimationsProperty.project4.end,
+    func: () => {
+		camera.rotation.x = lerp(scrollAnimationsProperty.project3End.rxEnd, scrollAnimationsProperty.project4.rxEnd, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		camera.rotation.y = lerp(scrollAnimationsProperty.project3End.ryEnd, scrollAnimationsProperty.project4.ryEnd, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		camera.rotation.z = lerp(scrollAnimationsProperty.project3End.rzEnd, scrollAnimationsProperty.project4.rzEnd, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+        camera.position.x = lerp(scrollAnimationsProperty.project3.pxEnd, scrollAnimationsProperty.project4.pxEnd, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		camera.position.y = lerp(scrollAnimationsProperty.project3.pyEnd, scrollAnimationsProperty.project4.pyEnd, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+        camera.position.z = lerp(scrollAnimationsProperty.project3.pzEnd, scrollAnimationsProperty.project4.pzEnd, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		openBtn.style.display = "none";
+		containerScreenH1.classList.remove("elementColorIn");
+		containerScreenH1.textContent = digitalProjects[3].title;
+		currentProjectId = 3;
+		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+    }
+});
+scrollAnimations.push({
+    start: scrollAnimationsProperty.project4Select.start,
+    end: scrollAnimationsProperty.project4Select.end,
+    func: () => {
+		openBtn.style.display = "block";
+		containerScreenH1.classList.add("elementColorIn");
+		openBtn.classList.add("elementWhiteIn");
+    }
+});
+scrollAnimations.push({
+    start: scrollAnimationsProperty.project4End.start,
+    end: scrollAnimationsProperty.project4End.end,
+    func: () => {
+		camera.rotation.x = lerp(scrollAnimationsProperty.project4.rxEnd, scrollAnimationsProperty.project4End.rxEnd, scalePercent(scrollAnimationsProperty.project4End.start, scrollAnimationsProperty.project4End.end));
+		camera.rotation.y = lerp(scrollAnimationsProperty.project4.ryEnd, scrollAnimationsProperty.project4End.ryEnd, scalePercent(scrollAnimationsProperty.project4End.start, scrollAnimationsProperty.project4End.end));
+		camera.rotation.z = lerp(scrollAnimationsProperty.project4.rzEnd, scrollAnimationsProperty.project4End.rzEnd, scalePercent(scrollAnimationsProperty.project4End.start, scrollAnimationsProperty.project4End.end));
+		containerScreenH1.classList.remove("elementColorIn");
+		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
+		currentProjectId = 3;
 		containerScreen.style.opacity = "0";
     }
 });
@@ -366,8 +433,6 @@ function onDocumentMouseMove( event ) {
 		event.preventDefault();
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		captureZone.style.top = `${mouse.y}px`;
-		captureZone.style.left = `${mouse.x}px`;
 		raycaster.setFromCamera( mouse, camera );
 		const intersects = raycaster.intersectObjects( scene.children, true);
 		if ( intersects.length > 0 ) { //if there is at least one intersected object
@@ -461,7 +526,7 @@ function createImages() {
 		let singleVideo = document.createElement('iframe');
 		singleVideo.src = digitalProjects[currentProjectId].video;
 		singleVideo.frameBorder = "none";
-		singleVideo.allow="accelerometer; autoplay; encrypted-media; gyroscope;";
+		singleVideo.allow="accelerometer; encrypted-media; gyroscope;";
 		singleVideo.className += "mySlides";
 		imageController.appendChild(singleVideo);
 		images.push(singleVideo);
@@ -551,6 +616,7 @@ function onBackBtnClick() {
 	containerScreen.style.display = "flex";
     backBtn.style.display = "none";
     renderer.domElement.style.filter = `none`;
+	slideIndex = 0;
 	enableScroll();
 }
 

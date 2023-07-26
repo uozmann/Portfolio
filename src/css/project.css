@@ -214,7 +214,7 @@ div#containerScreen {
 #containerScreen h1 {
     font-size: 121px;
 	font-family: 'Yeseva One', cursive;
-    color: rgba(0, 0, 0, 0.701);
+    color: rgba(0, 0, 0, 0);
     -webkit-text-stroke: 1px rgb(0, 0, 0); 
 }
 
@@ -283,6 +283,10 @@ article#moreWorks .workBox p {
     color: black;
 }
 
+article#moreWorks .nextCategory {
+    background: rgb(178, 195, 186);
+}
+
 .elementFadeInDown {
     animation: fadeInDown;
     animation-duration: 2s;
@@ -291,6 +295,18 @@ article#moreWorks .workBox p {
 .elementLightSpeedInRight {
     animation: lightSpeedInRight;
     animation-duration: 2s;
+}
+
+.elementColorIn {
+    animation: wipeBlack;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.elementWhiteIn {
+    animation: change-opacityIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes change-color {
@@ -302,12 +318,21 @@ article#moreWorks .workBox p {
     }
 }
 
+@keyframes wipeBlack {
+    0% {
+        /* filter: drop-shadow(5px 5px 5px rgba(255, 255, 255, 0)); */
+        color: rgba(0, 0, 0, 0);
+    }
+    100% {
+        color: rgba(0, 0, 0, 0.7);
+    }
+}
 @keyframes change-opacityIn {
     0% {
         opacity: 0;
     }
     100% {
-      opacity: 1;
+        opacity: 1;
     }
 }
 
