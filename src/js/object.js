@@ -51,6 +51,8 @@ let raycaster = new THREE.Raycaster();
 //Scroll interaction
 let scrollPercent = 0;
 let scrollAnimations = [];
+let scrollPause;
+let scrollUnpause;
 let scrollAnimationsProperty = {
     project1: {
         start: 0,
@@ -151,34 +153,35 @@ let digitalProjects = [
 		title: "Living lamp YouLing",
 		year: "2023",
 		author: "Man Zou",
-		description: "Lorem Ipsum.",
-		btn: "https://uozmann.itch.io/farewell-erren",
-		video: "https://www.youtube.com/embed/8diF1wwJhoE",
-		images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren0.png"]
+		description: "With YouLing, the creation aims to reflect on how the existence of our home furnitures can be shaped by our interactions with them, and in return, influence us through their response to those interactions. The lampshade is designed to resemble a tree trunk and root branching. This is to give a soft cognitive association to nature, which can help calm anxiety that we are exposed to in our daily life. It also goes with the theme of my project, which is 'aging'. The aging of our commodities is like the growth of roots: they are not as noticeable, but their influence changes and persists.",
+		btn: "./assets/visuals/object/youlingProcessBook.pdf",
+		// video: "https://www.youtube.com/embed/8diF1wwJhoE",
+		images: ["./assets/visuals/object/youling0.JPG", "./assets/visuals/object/youling1.JPG", "./assets/visuals/object/youling2.png", "./assets/visuals/object/youling3.jpg", "./assets/visuals/object/youling4.jpg", "./assets/visuals/object/youling5.jpg"]
 	},
 	{
 		title: "Boardgame: Fairy Tell",
 		year: "2019",
-		author: "Man Zou",
-		description: "“A lifetime in Circle” narrates topics on parenting in chronological order: from childhood to parenthood. Across several stages of the life cycle, the infant stage is crucial and determinant for a person’s formation of the self. This period characterized by vulnerability, transformability, and learnability has life-long impacts that are hard to be erased. I want to focus on the plurality of parenthood experiences, and look at the other side of the mirror where not all families live happily forever. I created this website to balance the mass preconception of parenting in hope to lead some less heard voices into this conversation.",
-		btn: "https://uozmann.github.io/CART263/project/Project2/src/indexThree.html", 
-		images: ["./assets/visuals/digital/allifetimeincircle1.png", "./assets/visuals/digital/allifetimeincircle2.jpg", "./assets/visuals/digital/allifetimeincircle.jpg", "./assets/visuals/digital/allifetimeincircle3.png"]
+		author: "Man Zou, Molly Taylor, Reihaneh Tamizkar, Vanessa Elisa",
+		description: "Fairy Tell is a board game where the central gameplay focuses on storytelling. This is a game orientated towards children of 2-8 years old, as the main purpose of the game is to stimulate the imagination and narrative capabilities of the child. By spinning on the double wheel, players can get to pick some transparent character/event card that they overlay on their window frame. The goal is to invent a story based on the scene pictured on the window; in turn, each person should continue the story that the other told.",
+		btn: "./assets/visuals/object/fairytellProcessBook.pdf", 
+		images: ["./assets/visuals/object/fairytell0.jpg", "./assets/visuals/object/fairytell1.png", "./assets/visuals/object/fairytell3.jpg", "./assets/visuals/object/fairytell2.jpg"]
 	},
 	{
 		title: "AstroYeast microfarm",
-		year: "2022",
-		author: "Man Zou",
-		description: "Lorem Ipsum.",
-		btn: "#",
-		images: ["./assets/visuals/digital/ontheclouds.jpg", "./assets/visuals/digital/ontheclouds1.jpg", "./assets/visuals/digital/ontheclouds2.jpg", "./assets/visuals/digital/ontheclouds3.jpg", "./assets/visuals/digital/ontheclouds4.jpg"] 
+		year: "2021",
+		author: "Man Zou (Team lead for Design and Social media ) with Concordia iGEM 2021's team",
+		description: "iGEM (international Genetically Engineered Machine is a worldwide synthetic biology competition. Our project Astroyeast Microfarm aims to build a space-adapted nutrient and flavour factory. This system is a compact and easy-to-use system that cultures a renewable source of food. Our system is analogous to an at-home hydroponic garden, but in space for growing small molecules such as nutrients, medicine, or plastics through bioproduction via yeast.",
+		btn: "https://2021.igem.org/Team:Concordia-Montreal",
+		video: "https://www.youtube.com/embed/Xl2YboeuKrQ",
+		images: ["./assets/visuals/object/igem0.png", "./assets/visuals/object/igem2.png", "./assets/visuals/object/igem3.png" ] 
 	},
 	{
 		title: "Friendly grower kit",
 		year: "2021",
-		author: "Man Zou",
-		description: "Lorem Ipsum.",
-		btn: "#",
-		images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren1.png"]
+		author: "Man Zou, Juan Esteban Mejia Gomez, Reihaneh Tamizkar",
+		description: "For this project, we have decided t to develop a kit entirely made by DYI methods of crafting using both sustainable materials and recycled waste components. The idea consists of an easy-to-learn and friendly method of producing and harvesting fungus and myco-materials in the comfort of your home. We focused on suspended methods used by urban mushroom farms as a reference for the crafting of the kit.",
+		btn: "./assets/visuals/object/fungigrowerProcessBook.pdf",
+		images: ["./assets/visuals/object/fungigrower0.jpg", "./assets/visuals/object/fungigrower1.jpg", "./assets/visuals/object/fungigrower2.jpg", "./assets/visuals/object/fungigrower3.png", "./assets/visuals/object/fungigrower4.png", "./assets/visuals/object/fungigrower5.png", "./assets/visuals/object/fungigrower6.jpg"]
 	}
 ];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,12 +264,14 @@ scrollAnimations.push({
 		currentProjectId = 0;
         containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project1Select.start,
     end: scrollAnimationsProperty.project1Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -303,12 +308,14 @@ scrollAnimations.push({
 		imageArrayRenewed = true;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project2Select.start,
     end: scrollAnimationsProperty.project2Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -326,6 +333,7 @@ scrollAnimations.push({
 		currentProjectId = 1;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -344,12 +352,14 @@ scrollAnimations.push({
 		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project3Select.start,
     end: scrollAnimationsProperty.project3Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -367,6 +377,7 @@ scrollAnimations.push({
 		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		scrollPause = false;
     }
 });
 //
@@ -386,15 +397,18 @@ scrollAnimations.push({
 		currentProjectId = 3;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project4Select.start,
     end: scrollAnimationsProperty.project4Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
+		document.getElementById("moreWorks").classList.remove("elementWhiteIn");
     }
 });
 scrollAnimations.push({
@@ -408,6 +422,8 @@ scrollAnimations.push({
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 3;
 		containerScreen.style.opacity = "0";
+		document.getElementById("moreWorks").classList.add("elementWhiteIn");
+		scrollPause = false;
     }
 });
 
@@ -425,6 +441,22 @@ function playScrollAnimations() {
             a.func();
         }
     })
+}
+
+function scrollPauseStart() {
+	if (onProjectDescription === true) {
+		disableScroll();
+	} else if (onProjectDescription === false) {
+		if (scrollPause === true) {
+			disableScroll();
+			scrollUnpause = setTimeout(() => {
+				scrollPause = false;
+			}, 1000);
+		} else if (scrollPause === false) {
+			// clearTimeout(scrollUnpause);
+			enableScroll();	
+		}
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // //EVENT HANDLERS SECTION
@@ -515,6 +547,7 @@ let images = [];
 let imageArrayRenewed = false;
 
 let slideIndex = 0;
+let onProjectDescription = false;
 
 
 createImages();
@@ -618,6 +651,7 @@ function onBackBtnClick() {
     renderer.domElement.style.filter = `none`;
 	slideIndex = 0;
 	enableScroll();
+	onProjectDescription = false;
 }
 
 function synchronizeContent() {
@@ -645,7 +679,7 @@ function onOpenBtnClick() {
     backBtn.style.display = "flex";
     renderer.domElement.style.filter = `blur(10px)`;
 	disableScroll();
-	console.log(images[0]);
+	onProjectDescription = true;
 }
 
 function onDescriptionBtnClick() {

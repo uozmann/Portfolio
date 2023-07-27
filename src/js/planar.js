@@ -51,6 +51,8 @@ let raycaster = new THREE.Raycaster();
 //Scroll interaction
 let scrollPercent = 0;
 let scrollAnimations = [];
+let scrollPause;
+let scrollUnpause;
 let scrollAnimationsProperty = {
     project1: {
         start: 0,
@@ -130,26 +132,26 @@ let digitalProjects = [
 		title: "Winter mood-lifter",
 		year: "2020",
 		author: "Man Zou",
-		description: "Lorem Ipsum.",
-		btn: "https://uozmann.itch.io/farewell-erren",
-		video: "https://www.youtube.com/embed/8diF1wwJhoE",
-		images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren0.png"]
+		description: "What is a book? Is it its forms that define it? Or the way we interact with it? A Mood-Lifter Collection is an unconventional book design project consisting of an informal encyclopedia about objects that will increase the user’s happiness in winter. Each object comes from a distinct individual who shared their experience with me. The pages are openable by folding and unfolding, in order to simulate the experience of unfolding the packaging of a gift. ",
+		btn: "./assets/visuals/planar/moodLifterProcessBook.pdf",
+		images: ["./assets/visuals/planar/moodLifter0.jpg", "./assets/visuals/planar/moodLifter1.jpg", "./assets/visuals/planar/moodLifter3.jpg", "./assets/visuals/planar/moodLifter4.jpg", "./assets/visuals/planar/moodLifter6.jpg", "./assets/visuals/planar/moodLifter8.jpg", "./assets/visuals/planar/moodLifter9.jpg", "./assets/visuals/planar/moodLifter10.jpg"]
 	},
 	{
 		title: "Invisible Heroes",
 		year: "2019",
 		author: "Man Zou",
-		description: "“A lifetime in Circle” narrates topics on parenting in chronological order: from childhood to parenthood. Across several stages of the life cycle, the infant stage is crucial and determinant for a person’s formation of the self. This period characterized by vulnerability, transformability, and learnability has life-long impacts that are hard to be erased. I want to focus on the plurality of parenthood experiences, and look at the other side of the mirror where not all families live happily forever. I created this website to balance the mass preconception of parenting in hope to lead some less heard voices into this conversation.",
-		btn: "https://uozmann.github.io/CART263/project/Project2/src/indexThree.html", 
-		images: ["./assets/visuals/digital/allifetimeincircle1.png", "./assets/visuals/digital/allifetimeincircle2.jpg", "./assets/visuals/digital/allifetimeincircle.jpg", "./assets/visuals/digital/allifetimeincircle3.png"]
+		description: "“Invisible Heroes” is a souvenir sheet containing four stamps, each one illustrating a real-life story of warm actions that happened in early 2000s. The cover package is in itself a slipping animation that plays when user slides the card out, showing a kite flying.",
+		btn: "./assets/visuals/planar/invisiblehDoc.pdf", 
+		images: ["./assets/visuals/planar/invisibleh0.png", "./assets/visuals/planar/invisibleh1.jpg", "./assets/visuals/planar/invisibleh2.jpg", "./assets/visuals/planar/invisibleh0.jpg"]
 	},
 	{
 		title: "ArtMatters: Object talk",
 		year: "2022",
-		author: "Man Zou",
-		description: "Lorem Ipsum.",
-		btn: "#",
-		images: ["./assets/visuals/digital/ontheclouds.jpg", "./assets/visuals/digital/ontheclouds1.jpg", "./assets/visuals/digital/ontheclouds2.jpg", "./assets/visuals/digital/ontheclouds3.jpg", "./assets/visuals/digital/ontheclouds4.jpg"] 
+		author: "Man Zou (graphic design) with Art Matters' coordination team",
+		description: "This second edition of the Art Matters Book Project features 5 artists working in the mediums of sculpture, interactive installation, and printmaking. 'Object Talk' is one of the nine programmed exhibitions that contemplates the interdependent relationships that humans have with inanimate objects. The book package contains several mini-books, each designed and styled according to the artwork’s personal traits.",
+		btn: "./assets/visuals/planar/artmattersProgramming.pdf",
+		video: "https://www.youtube.com/embed/5I8FkLVi2bw",
+		images: ["./assets/visuals/planar/objectTalk0.jpg", "./assets/visuals/planar/objectTalk1.jpg", "./assets/visuals/planar/objectTalk2.jpg", "./assets/visuals/planar/objectTalk3.jpg"] 
 	},
 	{
 		title: "TBD",
@@ -241,12 +243,14 @@ scrollAnimations.push({
 		currentProjectId = 0;
         containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project1Select.start,
     end: scrollAnimationsProperty.project1Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -264,6 +268,7 @@ scrollAnimations.push({
 		currentProjectId = 0;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -283,12 +288,14 @@ scrollAnimations.push({
 		imageArrayRenewed = true;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project2Select.start,
     end: scrollAnimationsProperty.project2Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -306,6 +313,7 @@ scrollAnimations.push({
 		currentProjectId = 1;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -324,15 +332,18 @@ scrollAnimations.push({
 		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project3Select.start,
     end: scrollAnimationsProperty.project3Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
+		document.getElementById("moreWorks").classList.remove("elementWhiteIn");
     }
 });
 scrollAnimations.push({
@@ -344,6 +355,8 @@ scrollAnimations.push({
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 2;
 		containerScreen.style.opacity = "0";
+		document.getElementById("moreWorks").classList.add("elementWhiteIn");
+		scrollPause = false;
     }
 });
 
@@ -361,6 +374,22 @@ function playScrollAnimations() {
             a.func();
         }
     })
+}
+
+function scrollPauseStart() {
+	if (onProjectDescription === true) {
+		disableScroll();
+	} else if (onProjectDescription === false) {
+		if (scrollPause === true) {
+			disableScroll();
+			scrollUnpause = setTimeout(() => {
+				scrollPause = false;
+			}, 1000);
+		} else if (scrollPause === false) {
+			// clearTimeout(scrollUnpause);
+			enableScroll();	
+		}
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // //EVENT HANDLERS SECTION
@@ -451,7 +480,7 @@ let images = [];
 let imageArrayRenewed = false;
 
 let slideIndex = 0;
-
+let onProjectDescription = false;
 
 createImages();
 createBadges();
@@ -554,6 +583,7 @@ function onBackBtnClick() {
     renderer.domElement.style.filter = `none`;
 	slideIndex = 0;
 	enableScroll();
+	onProjectDescription = false;
 }
 
 function synchronizeContent() {
@@ -581,7 +611,7 @@ function onOpenBtnClick() {
     backBtn.style.display = "flex";
     renderer.domElement.style.filter = `blur(10px)`;
 	disableScroll();
-	console.log(images[0]);
+	onProjectDescription = true;
 }
 
 function onDescriptionBtnClick() {
@@ -612,3 +642,7 @@ function onMenuCloseClick() {
 
 menuBtn.addEventListener('click', onMenuClick);
 menuCloseBtn.addEventListener('click', onMenuCloseClick);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//OTHER HTML
+// document.querySelector("..nextCategory").style.background = ""

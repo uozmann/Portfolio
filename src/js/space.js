@@ -51,6 +51,8 @@ let raycaster = new THREE.Raycaster();
 //Scroll interaction
 let scrollPercent = 0;
 let scrollAnimations = [];
+let scrollPause;
+let scrollUnpause;
 let scrollAnimationsProperty = {
     project1: {
         start: 0,
@@ -150,19 +152,19 @@ let digitalProjects = [
 	{
 		title: "Cocoon",
 		year: "2023",
-		author: "Man Zou",
-		description: "Lorem Ipsum.",
-		btn: "https://uozmann.itch.io/farewell-erren",
-		video: "https://www.youtube.com/embed/8diF1wwJhoE",
-		images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren0.png"]
+		author: "Man Zou, Reihaneh Tamizkar",
+		description: "Cocoon is a collapsible mobile installation where one is invited to be immersed in an audiovisual environment and interact with the artifact. This artifact is designed to trigger, stimulate and evoke diverse sentiments that would encourage the user to explore and reflect upon their personal emotions and be aware of how sounds can affect them in a safe space. By pressing your hand on different surfaces with different forces, sound and light motifs will change depending on the area and pressure force.",
+		btn: "./assets/visuals/space/cocoonProcessBook.pdf",
+		video: "https://www.youtube.com/embed/Wm54eH6TRTs",
+		images: ["./assets/visuals/space/cocoon0.jpg", "./assets/visuals/space/cocoon1.jpg", "./assets/visuals/space/cocoon2.jpg", "./assets/visuals/space/cocoon3.jpg"]
 	},
 	{
-		title: "CP3",
+		title: "CP3 Container",
 		year: "2021",
-		author: "Man Zou",
-		description: "“A lifetime in Circle” narrates topics on parenting in chronological order: from childhood to parenthood. Across several stages of the life cycle, the infant stage is crucial and determinant for a person’s formation of the self. This period characterized by vulnerability, transformability, and learnability has life-long impacts that are hard to be erased. I want to focus on the plurality of parenthood experiences, and look at the other side of the mirror where not all families live happily forever. I created this website to balance the mass preconception of parenting in hope to lead some less heard voices into this conversation.",
-		btn: "https://uozmann.github.io/CART263/project/Project2/src/indexThree.html", 
-		images: ["./assets/visuals/digital/allifetimeincircle1.png", "./assets/visuals/digital/allifetimeincircle2.jpg", "./assets/visuals/digital/allifetimeincircle.jpg", "./assets/visuals/digital/allifetimeincircle3.png"]
+		author: "Man Zou, Felix Beaudry",
+		description: "The following ecological design proposition is for the CP3 workshop made from recycled shipping containers. Two major concepts will be incorporated to adapt to seasonal changes. In winter, solar air heaters will be installed on the roof to help heat the interior and to decrease energy waste related to heating. A mini-fan in each tube will blow the air up to the heating panel and hot air will be returned to the room. In summer, the roof-top will have a vegetation area delimited by a range of gabion perimeter that will allow water evacuation while containing the dirt. The tubes for the solar air heater will be connected with ropes to be used as support for vines. Finally, the green roof will also act as an insulation layer against sunlight.",
+		btn: "./assets/visuals/space/cp3doc.pdf", 
+		images: ["./assets/visuals/space/cp30.jpg", "./assets/visuals/space/cp31.png", "./assets/visuals/space/cp32.png", "./assets/visuals/space/cp33.png", "./assets/visuals/space/cp34.png"]
 	},
 	{
 		title: "Sculpture Garden",
@@ -194,7 +196,7 @@ const loadAsync = url => {
 	})
 }
 //The below promise loading code comes from Sabine (computation lab)
-Promise.all([loadAsync('./assets/visuals/spaceAnimation.glb')]).then(models => { 
+Promise.all([loadAsync('./assets/visuals/spaceAnimationUnfinished.glb')]).then(models => { 
 	let blenderMixerIndex = 0; 
 	for(let j =0; j<models.length; j++){
 		blenderModels.push(models[j].scene);
@@ -261,12 +263,14 @@ scrollAnimations.push({
 		currentProjectId = 0;
         containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project1.start, scrollAnimationsProperty.project1.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project1Select.start,
     end: scrollAnimationsProperty.project1Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -284,6 +288,7 @@ scrollAnimations.push({
 		currentProjectId = 0;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project1End.start, scrollAnimationsProperty.project1End.end));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -303,12 +308,14 @@ scrollAnimations.push({
 		imageArrayRenewed = true;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project2.start, scrollAnimationsProperty.project2.end));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project2Select.start,
     end: scrollAnimationsProperty.project2Select.end,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -324,8 +331,10 @@ scrollAnimations.push({
 		containerScreenH1.classList.remove("elementColorIn");
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 1;
-		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		// containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		containerScreen.style.opacity = "0";
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project2End.start, scrollAnimationsProperty.project2End.end));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -340,19 +349,19 @@ scrollAnimations.push({
         camera.position.z = lerp(scrollAnimationsProperty.project2.pzEnd, scrollAnimationsProperty.project3.pzEnd, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
 		openBtn.style.display = "none";
 		containerScreenH1.classList.remove("elementColorIn");
-		containerScreenH1.textContent = digitalProjects[2].title;
-		currentProjectId = 2;
-		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
-		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
+		// containerScreenH1.textContent = digitalProjects[2].title;
+		// currentProjectId = 2;
+		// containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
+		// containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project3.start, scrollAnimationsProperty.project3.end));
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project3Select.start,
     end: scrollAnimationsProperty.project3Select.end,
     func: () => {
-		openBtn.style.display = "block";
-		containerScreenH1.classList.add("elementColorIn");
-		openBtn.classList.add("elementWhiteIn");
+		// openBtn.style.display = "block";
+		// containerScreenH1.classList.add("elementColorIn");
+		// openBtn.classList.add("elementWhiteIn");
     }
 });
 scrollAnimations.push({
@@ -363,10 +372,10 @@ scrollAnimations.push({
 		camera.rotation.y = lerp(scrollAnimationsProperty.project3.ryEnd, scrollAnimationsProperty.project3End.ryEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project3.rzEnd, scrollAnimationsProperty.project3End.rzEnd, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
 		containerScreenH1.classList.remove("elementColorIn");
-		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
-		currentProjectId = 2;
-		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
-		containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		// containerScreenH1.textContent = digitalProjects[currentProjectId].title;
+		// currentProjectId = 2;
+		// containerScreen.style.opacity = lerp(0.5, 0, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
+		// containerScreen.style.scale = lerp(1, 0.5, scalePercent(scrollAnimationsProperty.project3End.start, scrollAnimationsProperty.project3End.end));
     }
 });
 //
@@ -382,19 +391,20 @@ scrollAnimations.push({
         camera.position.z = lerp(scrollAnimationsProperty.project3.pzEnd, scrollAnimationsProperty.project4.pzEnd, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
 		openBtn.style.display = "none";
 		containerScreenH1.classList.remove("elementColorIn");
-		containerScreenH1.textContent = digitalProjects[3].title;
-		currentProjectId = 3;
-		containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
-		containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		// containerScreenH1.textContent = digitalProjects[3].title;
+		// currentProjectId = 3;
+		// containerScreen.style.opacity = lerp(0, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
+		// containerScreen.style.scale = lerp(0.5, 1, scalePercent(scrollAnimationsProperty.project4.start, scrollAnimationsProperty.project4.end));
     }
 });
 scrollAnimations.push({
     start: scrollAnimationsProperty.project4Select.start,
     end: scrollAnimationsProperty.project4Select.end,
     func: () => {
-		openBtn.style.display = "block";
-		containerScreenH1.classList.add("elementColorIn");
-		openBtn.classList.add("elementWhiteIn");
+		// openBtn.style.display = "block";
+		// containerScreenH1.classList.add("elementColorIn");
+		// openBtn.classList.add("elementWhiteIn");
+		document.getElementById("moreWorks").classList.remove("elementWhiteIn");
     }
 });
 scrollAnimations.push({
@@ -405,9 +415,10 @@ scrollAnimations.push({
 		camera.rotation.y = lerp(scrollAnimationsProperty.project4.ryEnd, scrollAnimationsProperty.project4End.ryEnd, scalePercent(scrollAnimationsProperty.project4End.start, scrollAnimationsProperty.project4End.end));
 		camera.rotation.z = lerp(scrollAnimationsProperty.project4.rzEnd, scrollAnimationsProperty.project4End.rzEnd, scalePercent(scrollAnimationsProperty.project4End.start, scrollAnimationsProperty.project4End.end));
 		containerScreenH1.classList.remove("elementColorIn");
-		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
-		currentProjectId = 3;
-		containerScreen.style.opacity = "0";
+		// containerScreenH1.textContent = digitalProjects[currentProjectId].title;
+		// currentProjectId = 3;
+		// containerScreen.style.opacity = "0";
+		document.getElementById("moreWorks").classList.add("elementWhiteIn");
     }
 });
 
@@ -425,6 +436,22 @@ function playScrollAnimations() {
             a.func();
         }
     })
+}
+
+function scrollPauseStart() {
+	if (onProjectDescription === true) {
+		disableScroll();
+	} else if (onProjectDescription === false) {
+		if (scrollPause === true) {
+			disableScroll();
+			scrollUnpause = setTimeout(() => {
+				scrollPause = false;
+			}, 1000);
+		} else if (scrollPause === false) {
+			// clearTimeout(scrollUnpause);
+			enableScroll();	
+		}
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // //EVENT HANDLERS SECTION
@@ -515,6 +542,7 @@ let images = [];
 let imageArrayRenewed = false;
 
 let slideIndex = 0;
+let onProjectDescription = false;
 
 
 createImages();
@@ -618,6 +646,7 @@ function onBackBtnClick() {
     renderer.domElement.style.filter = `none`;
 	slideIndex = 0;
 	enableScroll();
+	onProjectDescription = false;
 }
 
 function synchronizeContent() {
@@ -645,7 +674,7 @@ function onOpenBtnClick() {
     backBtn.style.display = "flex";
     renderer.domElement.style.filter = `blur(10px)`;
 	disableScroll();
-	console.log(images[0]);
+	onProjectDescription = true;
 }
 
 function onDescriptionBtnClick() {

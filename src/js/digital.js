@@ -51,6 +51,8 @@ let raycaster = new THREE.Raycaster();
 //Scroll interaction
 let scrollPercent = 0;
 let scrollAnimations = [];
+let scrollPause;
+let scrollUnpause;
 //Artwork Information
 let currentProjectId = 0;
 let digitalProjects = [
@@ -172,12 +174,14 @@ scrollAnimations.push({
 		currentProjectId = 0;
         containerScreen.style.opacity = lerp(0, 1, scalePercent(0, 15));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(0, 15));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: 15,
     end: 20,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -195,6 +199,7 @@ scrollAnimations.push({
 		currentProjectId = 0;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(20, 25));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(20, 25));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -214,12 +219,14 @@ scrollAnimations.push({
 		imageArrayRenewed = true;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(25, 40));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(25, 40));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: 40,
     end: 45,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -239,6 +246,7 @@ scrollAnimations.push({
 		currentProjectId = 1;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(45, 50));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(45, 50));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -257,12 +265,14 @@ scrollAnimations.push({
 		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(50, 65));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(50, 65));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: 65,
     end: 70,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
@@ -280,6 +290,7 @@ scrollAnimations.push({
 		currentProjectId = 2;
 		containerScreen.style.opacity = lerp(0.5, 0, scalePercent(70, 75));
 		containerScreen.style.scale = lerp(1, 0.5, scalePercent(70, 75));
+		scrollPause = false;
     }
 });
 scrollAnimations.push({
@@ -298,15 +309,18 @@ scrollAnimations.push({
 		currentProjectId = 3;
 		containerScreen.style.opacity = lerp(0, 1, scalePercent(75, 90));
 		containerScreen.style.scale = lerp(0.5, 1, scalePercent(75, 90));
+		scrollPause = true;
     }
 });
 scrollAnimations.push({
     start: 90,
     end: 95,
     func: () => {
+		scrollPauseStart();
 		openBtn.style.display = "block";
 		containerScreenH1.classList.add("elementColorIn");
 		openBtn.classList.add("elementWhiteIn");
+		document.getElementById("moreWorks").classList.remove("elementWhiteIn");
     }
 });
 scrollAnimations.push({
@@ -320,6 +334,8 @@ scrollAnimations.push({
 		containerScreenH1.textContent = digitalProjects[currentProjectId].title;
 		currentProjectId = 3;
 		containerScreen.style.opacity = "0";
+		document.getElementById("moreWorks").classList.add("elementWhiteIn");
+		scrollPause = false;
     }
 });
 
@@ -338,6 +354,23 @@ function playScrollAnimations() {
         }
     })
 }
+
+function scrollPauseStart() {
+	if (onProjectDescription === true) {
+		disableScroll();
+	} else if (onProjectDescription === false) {
+		if (scrollPause === true) {
+			disableScroll();
+			scrollUnpause = setTimeout(() => {
+				scrollPause = false;
+			}, 1000);
+		} else if (scrollPause === false) {
+			// clearTimeout(scrollUnpause);
+			enableScroll();	
+		}
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // //EVENT HANDLERS SECTION
 function onDocumentMouseMove( event ) {
@@ -382,7 +415,7 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
-function onDocumentScroll() {
+function onDocumentScroll(event) {
     //calculate the current scroll progress as a percentage
     scrollPercent =
         ((document.documentElement.scrollTop || document.body.scrollTop) /
@@ -425,7 +458,7 @@ let images = [];
 let imageArrayRenewed = false;
 
 let slideIndex = 0;
-
+let onProjectDescription = false;
 
 createImages();
 createBadges();
@@ -527,6 +560,7 @@ function onBackBtnClick() {
     renderer.domElement.style.filter = `none`;
 	slideIndex = 0;
 	enableScroll();
+	onProjectDescription = false;
 }
 
 function synchronizeContent() {
@@ -554,7 +588,7 @@ function onOpenBtnClick() {
     backBtn.style.display = "flex";
     renderer.domElement.style.filter = `blur(10px)`;
 	disableScroll();
-	console.log(images[0]);
+	onProjectDescription = true;
 }
 
 function onDescriptionBtnClick() {
