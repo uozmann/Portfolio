@@ -125,12 +125,21 @@ Promise.all([loadAsync('./assets/visuals/digitalAnimation.glb')]).then(models =>
 	}
 });
 
+//Preload GUI
+const loadingElem = document.querySelector('#loading');
+const progressBarElem = loadingElem.querySelector('.progressbar');
 loadManager.onProgress = (urlOfLastItemLoaded, itemsLoaded, itemsTotal) => {
+	document.body.style.overflow = "hidden";
 	const progress = itemsLoaded / itemsTotal;
+	progressBarElem.style.transform = `scaleX(${progress})`; //move the progress bar as items load
 };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //SETUP(ON LOAD) SECTION
 loadManager.onLoad = () => {
+	//Disable UI For preload
+	document.body.style.overflow = "auto";
+	loadingElem.style.display = 'none';
+	progressBarElem.style.display = 'none';
 	//Add objects to the scene
 	scene.add(...[lights.ambient, lights.directional, lights.hemisphere]);
 };
