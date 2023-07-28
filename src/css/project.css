@@ -9,6 +9,7 @@ font-family: 'Yeseva One', cursive; */
 
 body {
     background: rgb(195, 195, 195);
+    overflow: hidden;
 }
 
 article h1 {
