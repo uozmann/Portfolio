@@ -202,8 +202,9 @@ const loadingElem = document.querySelector('#loading');
 const progressBarElem = loadingElem.querySelector('.progressbar');
 loadManager.onProgress = (urlOfLastItemLoaded, itemsLoaded, itemsTotal) => {
 	document.body.style.overflow = "hidden";
-	progressBarElem.style.transform = `scaleX(${progress})`; //move the progress bar as items load
 	const progress = itemsLoaded / itemsTotal;
+	progressBarElem.style.transform = `scaleX(${progress})`; //move the progress bar as items load
+	
 };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //SETUP(ON LOAD) SECTION
