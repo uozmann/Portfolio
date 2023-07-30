@@ -21,7 +21,7 @@ import Version0 from './Version0.js';
 import Reality from './RealityContent.js';
 import Simulation from './SimulationContent.js';
 //other js files
-
+THREE.Cache.enabled = true;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //OBJECTS SECTION
 //General settings
@@ -194,6 +194,7 @@ let raycaster = new THREE.Raycaster();
 //PRELOAD SECTION
 const loadManager = new THREE.LoadingManager();
 const loaderGLTF = new GLTFLoader(loadManager);
+
 //Using promise to load models
 const loadAsync = url => {
 	return new Promise(resolve => {

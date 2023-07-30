@@ -6,7 +6,7 @@ import * as THREE from '../../threeJS/src/Three.js';
 import { GLTFLoader } from '../../threeJS/examples/jsm/loaders/GLTFLoader.js';
 import { CSS3DRenderer, CSS3DObject } from '../../threeJS/examples/jsm/renderers/CSS3DRenderer.js';
 import {  OrbitControls } from '../../threeJS/examples/jsm/controls/OrbitControls.js';
-
+THREE.Cache.enabled = true;
 //General settings
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
