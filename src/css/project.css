@@ -65,6 +65,7 @@ canvas {
     right: 0;
     margin: 1em;
     font-size: 48px;
+    z-index: 4;
   }
   
 #menuLogo:hover {
@@ -269,6 +270,7 @@ section#menuPage {
     height: 100%;
     display: none;
     flex-flow: column;
+    z-index: 5;
 }
 
 div#menuCloseLogo {
@@ -279,6 +281,7 @@ div#menuCloseLogo {
     font-size: 48px;
     color: white;
     display: none;
+    z-index: 6;
 }
 
 div#menuCloseLogo:hover {
