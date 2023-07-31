@@ -62,6 +62,7 @@ let digitalProjects = [
 		author: "Man Zou",
 		description: "Farewell Erren is a semi-open-world game where players gradually uncover secrets of a dark past. The player starts off inside someone’s dream with a robot assistant who guides the quest to find the dream’s host. Once in the dream world, players must collect objects to repair the half-broken world so that passages to new zones can be unlocked. During this exploration, they might also find pieces of memory that construct a surprising revelation.",
 		btn: "https://uozmann.itch.io/farewell-erren",
+		video: "https://www.youtube.com/embed/lzKpXq-tAM8",
 		images: ["./assets/visuals/digital/farewellErren0.png", "./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren2.png", "./assets/visuals/digital/farewellErren3.png", "./assets/visuals/digital/farewellErren4.png", "./assets/visuals/digital/farewellErren5.png", "./assets/visuals/digital/farewellErren6.png", "./assets/visuals/digital/farewellErren7.png", "./assets/visuals/digital/farewellErren8.png", "./assets/visuals/digital/farewellErren9.png", "./assets/visuals/digital/farewellErren10.png"]
 	},
 	{
