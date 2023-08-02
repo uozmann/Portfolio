@@ -384,3 +384,37 @@ article#moreWorks .workBox p {
       opacity: 0;
     }
 }
+
+@media ( 1024px <= width <= 1410px) {
+    div#backBtn {
+        left: 4vw;
+    }
+    #selectionText {
+        margin-left: 5vw;
+        width: 90vw;
+    }
+    section.textDescription {
+        width: 40%;
+    }
+    section.imageDescription {
+        width: 60%;
+    }
+    #containerScreen h1 {
+        font-size: 100px;
+    }
+}
+
+@media (940px <= width <= 1023px) {
+    #containerScreen h1 {
+        font-size: 82px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    p {
+        font-size: 16px;
+    }
+}
