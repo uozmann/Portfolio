@@ -141,6 +141,7 @@ loadManager.onLoad = () => {
 	document.body.style.overflow = "auto";
 	loadingElem.style.display = 'none';
 	progressBarElem.style.display = 'none';
+	directiveDiv.style.display = 'flex';
 	//Add objects to the scene
 	scene.add(...[lights.ambient, lights.directional, lights.hemisphere]);
 };
@@ -373,7 +374,7 @@ function scrollPauseStart() {
 			disableScroll();
 			scrollUnpause = setTimeout(() => {
 				scrollPause = false;
-			}, 1000);
+			}, 500);
 		} else if (scrollPause === false) {
 			// clearTimeout(scrollUnpause);
 			enableScroll();	
@@ -434,6 +435,7 @@ function onDocumentScroll(event) {
                 document.documentElement.clientHeight)) *
         100
     ;
+	projectId.textContent = `${currentProjectId + 1}/${digitalProjects.length}`;
 }
 
 function onWindowKeypress() {
@@ -466,6 +468,9 @@ let dotsBadge = [];
 let imageController = document.querySelector(".imageController");
 let images = [];
 let imageArrayRenewed = false;
+//Scroll Indicator
+let directiveDiv = document.getElementById("directiveSign");
+let projectId = document.getElementById("projectId");
 
 let slideIndex = 0;
 let onProjectDescription = false;
@@ -565,12 +570,14 @@ function enableScroll() {
 function onBackBtnClick() {
     descriptionContainer.style.display = "none";
     openBtn.style.display = "block";
+	directiveDiv.style.display = "flex";
 	containerScreen.style.display = "flex";
     backBtn.style.display = "none";
     renderer.domElement.style.filter = `none`;
 	slideIndex = 0;
 	enableScroll();
 	onProjectDescription = false;
+	synchronizeContent();
 }
 
 function synchronizeContent() {
@@ -594,6 +601,7 @@ function onOpenBtnClick() {
 	synchronizeContent();
     descriptionContainer.style.display = "flex";
     openBtn.style.display = "none";
+	directiveDiv.style.display = "none";
 	containerScreen.style.display = "none";
     backBtn.style.display = "flex";
     renderer.domElement.style.filter = `blur(10px)`;

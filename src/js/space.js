@@ -165,23 +165,23 @@ let digitalProjects = [
 		description: "The following ecological design proposition is for the CP3 workshop made from recycled shipping containers. Two major concepts will be incorporated to adapt to seasonal changes. In winter, solar air heaters will be installed on the roof to help heat the interior and to decrease energy waste related to heating. A mini-fan in each tube will blow the air up to the heating panel and hot air will be returned to the room. In summer, the roof-top will have a vegetation area delimited by a range of gabion perimeter that will allow water evacuation while containing the dirt. The tubes for the solar air heater will be connected with ropes to be used as support for vines. Finally, the green roof will also act as an insulation layer against sunlight.",
 		btn: "./assets/visuals/space/cp3doc.pdf", 
 		images: ["./assets/visuals/space/cp30.jpg", "./assets/visuals/space/cp31.png", "./assets/visuals/space/cp32.png", "./assets/visuals/space/cp33.png", "./assets/visuals/space/cp34.png"]
-	},
-	{
-		title: "Sculpture Garden",
-		year: "2021",
-		author: "Man Zou",
-		description: "Lorem Ipsum.",
-		btn: "#",
-		images: ["./assets/visuals/digital/ontheclouds.jpg", "./assets/visuals/digital/ontheclouds1.jpg", "./assets/visuals/digital/ontheclouds2.jpg", "./assets/visuals/digital/ontheclouds3.jpg", "./assets/visuals/digital/ontheclouds4.jpg"] 
-	},
-	{
-		title: "Ebb in flow",
-		year: "2022",
-		author: "Man Zou",
-		description: "Ebb in flow was inspired by the flowing sensations of cortisol levels in the body, responding to the stresses in the daily environments. These ever-changing cortisol levels vary when we let ourselves indulge in nature’s calm and restorative abilities, a phenomenon that has yet to be pin-pointed, but whose power is true, nonetheless. The nature-inspired mossy seat invites the viewer to change their cortisol level when taking the chance to sit down, to feel the softness beneath them, sense the smells, and see a visual representation of a calming inner body.",
-		btn: "#",
-		images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren1.png"]
 	}
+	// {
+	// 	title: "Sculpture Garden",
+	// 	year: "2021",
+	// 	author: "Man Zou",
+	// 	description: "Lorem Ipsum.",
+	// 	btn: "#",
+	// 	images: ["./assets/visuals/digital/ontheclouds.jpg", "./assets/visuals/digital/ontheclouds1.jpg", "./assets/visuals/digital/ontheclouds2.jpg", "./assets/visuals/digital/ontheclouds3.jpg", "./assets/visuals/digital/ontheclouds4.jpg"] 
+	// },
+	// {
+	// 	title: "Ebb in flow",
+	// 	year: "2022",
+	// 	author: "Man Zou",
+	// 	description: "Ebb in flow was inspired by the flowing sensations of cortisol levels in the body, responding to the stresses in the daily environments. These ever-changing cortisol levels vary when we let ourselves indulge in nature’s calm and restorative abilities, a phenomenon that has yet to be pin-pointed, but whose power is true, nonetheless. The nature-inspired mossy seat invites the viewer to change their cortisol level when taking the chance to sit down, to feel the softness beneath them, sense the smells, and see a visual representation of a calming inner body.",
+	// 	btn: "#",
+	// 	images: ["./assets/visuals/digital/farewellErren1.png", "./assets/visuals/digital/farewellErren1.png"]
+	// }
 ];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //PRELOAD SECTION
@@ -233,6 +233,7 @@ loadManager.onLoad = () => {
 	document.body.style.overflow = "auto";
 	loadingElem.style.display = 'none';
 	progressBarElem.style.display = 'none';
+	directiveDiv.style.display = 'flex';
 	//Add objects to the scene
 	scene.add(...[lights.ambient, lights.directional, lights.hemisphere]);
 };
@@ -455,7 +456,7 @@ function scrollPauseStart() {
 			disableScroll();
 			scrollUnpause = setTimeout(() => {
 				scrollPause = false;
-			}, 1000);
+			}, 500);
 		} else if (scrollPause === false) {
 			// clearTimeout(scrollUnpause);
 			enableScroll();	
@@ -515,6 +516,7 @@ function onDocumentScroll() {
                 document.documentElement.clientHeight)) *
         100
     ;
+	projectId.textContent = `${currentProjectId + 1}/${digitalProjects.length}`;
 }
 
 function onWindowKeypress() {
@@ -549,6 +551,9 @@ let dotsBadge = [];
 let imageController = document.querySelector(".imageController");
 let images = [];
 let imageArrayRenewed = false;
+//Scroll Indicator
+let directiveDiv = document.getElementById("directiveSign");
+let projectId = document.getElementById("projectId");
 
 let slideIndex = 0;
 let onProjectDescription = false;
@@ -650,12 +655,14 @@ function enableScroll() {
 function onBackBtnClick() {
     descriptionContainer.style.display = "none";
     openBtn.style.display = "block";
+	directiveDiv.style.display = "flex";
 	containerScreen.style.display = "flex";
     backBtn.style.display = "none";
     renderer.domElement.style.filter = `none`;
 	slideIndex = 0;
 	enableScroll();
 	onProjectDescription = false;
+	synchronizeContent();
 }
 
 function synchronizeContent() {
@@ -679,6 +686,7 @@ function onOpenBtnClick() {
 	synchronizeContent();
     descriptionContainer.style.display = "flex";
     openBtn.style.display = "none";
+	directiveDiv.style.display = "none";
 	containerScreen.style.display = "none";
     backBtn.style.display = "flex";
     renderer.domElement.style.filter = `blur(10px)`;
