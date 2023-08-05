@@ -277,6 +277,9 @@ loadManager.onLoad = () => {
 	//Add objects to the scene
 	scene.add(...[lights.ambient, lights.directional, lights.hemisphere]);
 	scene.add( controls.getObject() );
+	//PRELOAD OTHER PAGES
+	const url = './digital.html';
+	fetch(url, {credentials: `include`});
 };
 //END OF ON LOAD SECTION
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,7 +300,6 @@ function render() {
 	// labelRenderer.render( scene, camera );
 	//texts to be displayed
 	displayMenuIcon();
-	triggerContent();
 	//To update gltf models animations
 	let delta = clock.getDelta();
   	for(let i=0; i<blenderMixer.length; i++){
@@ -322,8 +324,6 @@ function displayTitleText(text, text1, text2, x, y) {
 		titleContainer.classList.remove("elementAnimate");
 		// console.log('Removed');
 	}
-	// titleContainer.classList.remove("elementAnimate");
-	// titleLabel.position.set( x, y, 0 );
 	titleContainer.style.marginLeft = `${x}vw`;
 	titleContainer.style.marginTop = `${y}vh`;
 	// console.log(previousText);
@@ -396,41 +396,12 @@ function animateSphere(whichOne) {
 	blenderMixer[6].stopAllAction();
 	} 	
 }
-
-//Detect Scene distance based on the camera (player) location
-function detectDistance(x, y, z) {
-	let placeB = new THREE.Vector3( x, y, z );
-	return camera.position.distanceTo(placeB);
-}
-
-//Calculate is the player is close enough to the scene to trigger narratives
-function triggerContent() {
-	let dScene0 = detectDistance(models.cube.position.x, models.cube.position.y, models.cube.position.z); //childhood
-}
 //END OF ON DRAW SECTION
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // //EVENT HANDLERS SECTION
-// //Tweenning for Version0
-function moveVersion0(xpos=5, ypos=0, zpos=0, rpos=-Math.PI/2, time=2000) {
-	//Update target position if needs to be changed
-	version0Settings.modelTweenTo.x = xpos;
-	version0Settings.modelTweenTo.y = ypos;
-	version0Settings.modelTweenTo.z = zpos;
-	//Change the position of the version0 model
-	version0Tweening.to(version0Settings.modelTweenTo, time);
-	version0Tweening.onUpdate(function(){
-		blenderModels[1].position.set(version0Settings.model.x, version0Settings.model.y, version0Settings.model.z); 
-	});
-	//Choose the easing
-	version0Tweening.easing(TWEEN.Easing.Back.InOut);
-	version0Tweening.start();
-	//Rotate the model to face the front
-	blenderModels[1].rotateY(rpos);
-}
-
 function onDocumentMouseMove( event ) {
 	if (mouseAllowed) {
 		event.preventDefault();
@@ -551,6 +522,7 @@ document.getElementById('homeLogo').addEventListener('click', onHomeMouseClick);
 titleContainer.addEventListener('animationend', onTitleAnimationEnd, false);
 //END OF EVENT HANDLERS SECTION
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //MENU SECTION

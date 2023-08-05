@@ -112,6 +112,9 @@ div#directiveSign {
 div#directiveSign h1#arrowDown {
     color: rgba(0, 0, 0, 0.5);
     font-size: 36px;
+    animation: change-opacityIn;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
 }
 
 h2 {
