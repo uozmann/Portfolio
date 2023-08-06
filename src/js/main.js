@@ -510,6 +510,14 @@ function onTitleAnimationEnd() {
 	previousText = titleDiv.textContent;
 }
 
+function onWindowLoaded() {
+ if (screen.width <= 1368 && screen.width > 940) {
+	alert("For better result, view the site on a larger window size, landscape format.");
+ } else if (screen.width <= 940) {
+	alert("Your screen size is too small, please view the site on computer.");
+ } 
+}
+
 //general commands
 document.addEventListener( 'mousemove', onDocumentMouseMove );
 document.addEventListener( 'click', onDocumentMouseClick );
@@ -520,6 +528,7 @@ window.addEventListener( 'resize', onWindowResize, false );
 document.getElementById('homeLogo').addEventListener('click', onHomeMouseClick);
 //Section title
 titleContainer.addEventListener('animationend', onTitleAnimationEnd, false);
+window.addEventListener("load", onWindowLoaded);
 //END OF EVENT HANDLERS SECTION
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
