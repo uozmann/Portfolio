@@ -155,7 +155,7 @@ let digitalProjects = [
 		author: "Man Zou, Reihaneh Tamizkar",
 		description: "Cocoon is a collapsible mobile installation where one is invited to be immersed in an audiovisual environment and interact with the artifact. This artifact is designed to trigger, stimulate and evoke diverse sentiments that would encourage the user to explore and reflect upon their personal emotions and be aware of how sounds can affect them in a safe space. By pressing your hand on different surfaces with different forces, sound and light motifs will change depending on the area and pressure force.",
 		btn: "./assets/visuals/space/cocoonProcessBook.pdf",
-		video: "https://www.youtube.com/embed/Wm54eH6TRTs",
+		video: "https://www.youtube.com/embed/TrMdoIbzmRQ",
 		images: ["./assets/visuals/space/cocoon.jpg", "./assets/visuals/space/cocoon4.jpg", "./assets/visuals/space/cocoon5.jpg", "./assets/visuals/space/cocoon6.jpg"]
 	},
 	{

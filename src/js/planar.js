@@ -142,7 +142,8 @@ let digitalProjects = [
 		author: "Man Zou",
 		description: "“Invisible Heroes” is a souvenir sheet containing four stamps, each one illustrating a real-life story of warm actions that happened in early 2000s. The cover package is in itself a slipping animation that plays when user slides the card out, showing a kite flying.",
 		btn: "./assets/visuals/planar/invisiblehDoc.pdf", 
-		images: ["./assets/visuals/planar/invisibleh0.png", "./assets/visuals/planar/invisibleh1.jpg", "./assets/visuals/planar/invisibleh2.jpg", "./assets/visuals/planar/invisibleh0.jpg"]
+		video: "https://www.youtube.com/embed/LNxupyrMFxs",
+		images: ["./assets/visuals/planar/invisibleh3.jpg", "./assets/visuals/planar/invisibleh1.jpg", "./assets/visuals/planar/invisibleh2.jpg", "./assets/visuals/planar/invisibleh0.jpg"]
 	},
 	{
 		title: "ArtMatters: Object talk",
@@ -151,7 +152,7 @@ let digitalProjects = [
 		description: "This second edition of the Art Matters Book Project features 5 artists working in the mediums of sculpture, interactive installation, and printmaking. 'Object Talk' is one of the nine programmed exhibitions that contemplates the interdependent relationships that humans have with inanimate objects. The book package contains several mini-books, each designed and styled according to the artwork’s personal traits.",
 		btn: "./assets/visuals/planar/artmattersProgramming.pdf",
 		video: "https://www.youtube.com/embed/5I8FkLVi2bw",
-		images: ["./assets/visuals/planar/objectTalk0.jpg", "./assets/visuals/planar/objectTalk1.jpg", "./assets/visuals/planar/objectTalk2.jpg", "./assets/visuals/planar/objectTalk3.jpg"] 
+		images: ["./assets/visuals/planar/objectTalk0.jpg", "./assets/visuals/planar/objectTalk3.jpg"] 
 	}
 ];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
