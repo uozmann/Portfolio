@@ -143,7 +143,7 @@ let digitalProjects = [
 		description: "“Invisible Heroes” is a souvenir sheet containing four stamps, each one illustrating a real-life story of warm actions that happened in early 2000s. The cover package is in itself a slipping animation that plays when user slides the card out, showing a kite flying.",
 		btn: "./assets/visuals/planar/invisiblehDoc.pdf", 
 		video: "https://www.youtube.com/embed/LNxupyrMFxs",
-		images: ["./assets/visuals/planar/invisibleh3.jpg", "./assets/visuals/planar/invisibleh1.jpg", "./assets/visuals/planar/invisibleh2.jpg", "./assets/visuals/planar/invisibleh0.jpg"]
+		images: ["./assets/visuals/planar/invisibleh3.jpg", "./assets/visuals/planar/invisibleh4.jpg", "./assets/visuals/planar/invisibleh5.jpg"]
 	},
 	{
 		title: "ArtMatters: Object talk",
