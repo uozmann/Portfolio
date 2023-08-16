@@ -204,7 +204,7 @@ const loadAsync = url => {
 	})
 }
 //The below promise loading code comes from Sabine (computation lab)
-Promise.all([loadAsync('./assets/visuals/sphereanim0.glb'), loadAsync('./assets/visuals/version0.glb'), loadAsync('./assets/visuals/sphereTransform.glb'), loadAsync('./assets/visuals/background.glb'), loadAsync('./assets/visuals/sphereTransform002.glb'), loadAsync('./assets/visuals/sphereTransform003.glb'), loadAsync('./assets/visuals/sphereTransform004.glb')]).then(models => { 
+Promise.all([loadAsync('./assets/visuals/sphereanim0.glb'), loadAsync('./assets/visuals/version0.glb'), loadAsync('./assets/visuals/sphereTransform.glb'), loadAsync('./assets/visuals/background.glb'), loadAsync('./assets/visuals/sphereTransform002.glb'), loadAsync('./assets/visuals/sphereTransform0033.glb'), loadAsync('./assets/visuals/sphereTransform0044.glb')]).then(models => { 
 	let blenderMixerIndex = 0;
 	for(let j =0; j<models.length; j++){
 		blenderModels.push(models[j].scene);
@@ -277,6 +277,7 @@ loadManager.onLoad = () => {
 	//Add objects to the scene
 	scene.add(...[lights.ambient, lights.directional, lights.hemisphere]);
 	scene.add( controls.getObject() );
+	document.getElementById("directiveSign").style.opacity = "1"; 
 	//PRELOAD OTHER PAGES
 	const url = './digital.html';
 	fetch(url, {credentials: `include`});
@@ -394,7 +395,7 @@ function animateSphere(whichOne) {
 	blenderMixer[4].stopAllAction();
 	blenderMixer[5].stopAllAction();
 	blenderMixer[6].stopAllAction();
-	} 	
+	}	
 }
 //END OF ON DRAW SECTION
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -426,6 +427,7 @@ function onDocumentMouseMove( event ) {
 					player.sphereHovered = true;
 					displayTitleText('DIGITAL', 'Web/Game/Imagery/Videography', 'Left-click to view', 10, 20);
 					animateSphere(3);
+					document.getElementById("directiveSign").style.opacity = "0"; 
 					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex(); ////record the current colour
 					INTERSECTED.material.emissive.setHex( 0x00ad3d ); //blue emmissive
 				} else if(INTERSECTED.name === 'Sphere002') { //Check if version 0 is hovered
@@ -433,6 +435,7 @@ function onDocumentMouseMove( event ) {
 					player.sphereHovered = true;
 					displayTitleText('OBJECT', 'Furniture/Artifact/Interactive Piece', 'Left-click to view', 50, 20);
 					animateSphere(4);
+					document.getElementById("directiveSign").style.opacity = "0"; 
 					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex(); ////record the current colour
 					INTERSECTED.material.emissive.setHex( 0xddff00 ); //blue emmissive
 				} else if(INTERSECTED.name === 'Sphere001') { //Check if version 0 is hovered
@@ -440,6 +443,7 @@ function onDocumentMouseMove( event ) {
 					player.sphereHovered = true;
 					displayTitleText('PLANAR', 'Print', 'Left-click to view', 10, 40);
 					animateSphere(2);
+					document.getElementById("directiveSign").style.opacity = "0"; 
 					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex(); ////record the current colour
 					INTERSECTED.material.emissive.setHex( 0x0051ff ); //blue emmissive
 				} else if(INTERSECTED.name === 'Sphere004') { //Check if version 0 is hovered
@@ -447,6 +451,7 @@ function onDocumentMouseMove( event ) {
 					player.sphereHovered = true;
 					displayTitleText('SPACE', 'Environment/Interior/Living Space', 'Left-click to view', 50, 40);
 					animateSphere(1);
+					document.getElementById("directiveSign").style.opacity = "0"; 
 					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex(); ////record the current colour
 					INTERSECTED.material.emissive.setHex( 0xae00ff ); //blue emmissive
 				}
